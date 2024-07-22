@@ -51,6 +51,15 @@ export class ServerExtensionsConfig extends ClientExtensionsConfig {
 
   @ConfigProperty({
     tags: {
+      name: $localize`Repository url`,
+      priority: ConfigPriority.underTheHood
+    },
+    description: $localize`Repository url that points to a list of extensions in .md format.`,
+  })
+  repositoryUrl: string = 'https://raw.githubusercontent.com/bpatrik/pigallery2/master/extension/REPOSITORY.md';
+
+  @ConfigProperty({
+    tags: {
       name: $localize`Extension folder`,
       priority: ConfigPriority.underTheHood,
       dockerSensitive: true
