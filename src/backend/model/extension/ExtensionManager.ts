@@ -13,6 +13,7 @@ import {ExtensionObject} from './ExtensionObject';
 import {ExtensionDecoratorObject} from './ExtensionDecorator';
 import * as util from 'util';
 import {ServerExtensionsEntryConfig} from '../../../common/config/private/subconfigs/ServerExtensionsConfig';
+import {ExtensionRepository} from './ExtensionRepository';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const exec = util.promisify(require('child_process').exec);
 
@@ -21,6 +22,7 @@ const LOG_TAG = '[ExtensionManager]';
 export class ExtensionManager implements IObjectManager {
 
   public static EXTENSION_API_PATH = Config.Server.apiPath + '/extension';
+  public repository: ExtensionRepository = new ExtensionRepository();
 
   events: IExtensionEvents;
   extObjects: { [key: string]: ExtensionObject<unknown> } = {};
