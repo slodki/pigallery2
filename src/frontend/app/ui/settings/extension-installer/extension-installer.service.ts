@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {NetworkService} from '../../../model/network/network.service';
-import {UserDTO} from '../../../../../common/entities/UserDTO';
+import {ExtensionListItem} from '../../../../../common/entities/extension/ExtensionListItem';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,11 @@ export class ExtensionInstallerService {
   constructor(private networkService: NetworkService) {
   }
 
+  public getExtensions(): Promise<Array<ExtensionListItem>> {
+    return this.networkService.getJson('/extension/list');
+  }
 
-
-  public getExtensions(): Promise<Array<UserDTO>> {
-    return this.networkService.getJson('/user/list');
+  public installExtension(extensionId: string): Promise<void> {
+    return this.networkService.postJson('/extension/install', {id: extensionId});
   }
 }
