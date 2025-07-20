@@ -31,7 +31,7 @@ export class ExtensionRepository {
   }
 
 
-  public async fetchList() {
+  public async fetchList(): Promise<ExtensionListItem[]> {
     const res = await (await fetch(Config.Extensions.repositoryUrl)).text();
     const lines = res.split('\n');
     lines.forEach(line => line.trim());
@@ -62,8 +62,8 @@ export class ExtensionRepository {
         zipUrl: this.getUrlFromMDLink(entries[3])
       });
     });
-
     this.extensionsList = extensions;
     this.lastUpdate = new Date().getTime();
+    return this.extensionsList;
   }
 }
