@@ -72,6 +72,7 @@ export class ServerExtensionsConfig extends ClientExtensionsConfig {
     type: ConfigMap,
     tags: {
       name: $localize`Installed extensions`,
+      uiIcon: 'ionList',
       priority: ConfigPriority.advanced
     }
   })

@@ -181,7 +181,9 @@ import {
   ionVolumeMuteOutline,
   ionWarningOutline,
   ionOpenOutline,
-  ionRefresh
+  ionRefresh,
+  ionExtensionPuzzleOutline,
+  ionList
 } from '@ng-icons/ionicons';
 import {SafeHtmlPipe} from './pipes/SafeHTMLPipe';
 import {DatePipe} from '@angular/common';
@@ -259,7 +261,7 @@ Marker.prototype.options.icon = MarkerFactory.defIcon;
       ionTimeOutline, ionCheckmarkOutline, ionPulseOutline, ionResizeOutline,
       ionCloudOutline, ionChatboxOutline, ionServerOutline, ionFileTrayFullOutline, ionBrushOutline,
       ionBrowsersOutline, ionUnlinkOutline, ionSquareOutline, ionGridOutline,
-      ionAppsOutline,ionOpenOutline,ionRefresh
+      ionAppsOutline,ionOpenOutline,ionRefresh,ionExtensionPuzzleOutline,ionList
     }),
     ClipboardModule,
     TooltipModule.forRoot(),
