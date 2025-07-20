@@ -4,15 +4,16 @@ import {ObjectManagers} from '../../model/ObjectManagers';
 import {StatisticDTO} from '../../../common/entities/settings/StatisticDTO';
 import {MessengerRepository} from '../../model/messenger/MessengerRepository';
 import {JobStartDTO} from '../../../common/entities/job/JobDTO';
+import {ExtensionListItem} from '../../../common/entities/extension/ExtensionListItem';
 
 export class ExtensionMWs {
-  public static getExtensionList(
+  public static async getExtensionList(
     req: Request,
     res: Response,
     next: NextFunction
-  ): void {
+  ): Promise<void> {
     try {
-      req.resultPipe = ObjectManagers.getInstance().ExtensionManager.repository.fetchList();
+      req.resultPipe = await ObjectManagers.getInstance().ExtensionManager.repository.fetchList();
       return next();
     } catch (err) {
       if (err instanceof Error) {
