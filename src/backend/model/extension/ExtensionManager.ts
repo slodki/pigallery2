@@ -14,6 +14,7 @@ import {ExtensionDecoratorObject} from './ExtensionDecorator';
 import * as util from 'util';
 import {ServerExtensionsEntryConfig} from '../../../common/config/private/subconfigs/ServerExtensionsConfig';
 import {ExtensionRepository} from './ExtensionRepository';
+import {ExtensionListItem} from '../../../common/entities/extension/ExtensionListItem';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const exec = util.promisify(require('child_process').exec);
 
@@ -32,6 +33,8 @@ export class ExtensionManager implements IObjectManager {
     this.initEvents();
   }
 
+
+
   public async init() {
     this.extObjects = {};
     this.initEvents();
@@ -40,8 +43,24 @@ export class ExtensionManager implements IObjectManager {
     }
     this.router = express.Router();
     Server.instance?.app.use(ExtensionManager.EXTENSION_API_PATH, this.router);
-    this.loadExtensionsList();
     await this.initExtensions();
+  }
+
+  public async getExtensionListWithInstallStatus(): Promise<ExtensionListItem[]> {
+    const extensionList = await this.repository.getExtensionList();
+
+    // Add installed status to each extension
+    return extensionList.map(extension => {
+      // Check if the extension is installed by looking for its name in the installed extensions
+      const isInstalled = Array.from(Config.Extensions.extensions.keys()).some(
+        key => key.toLowerCase() === extension.id.toLowerCase()
+      );
+
+      return {
+        ...extension,
+        installed: isInstalled
+      };
+    });
   }
 
   private initEvents() {
@@ -68,23 +87,6 @@ export class ExtensionManager implements IObjectManager {
     ExtensionDecoratorObject.init(this.events);
   }
 
-  public loadExtensionsList() {
-    Logger.debug(LOG_TAG, 'Loading extension list from ' + ProjectPath.ExtensionFolder);
-    if (!fs.existsSync(ProjectPath.ExtensionFolder)) {
-      return;
-    }
-
-
-    const extList = fs
-      .readdirSync(ProjectPath.ExtensionFolder)
-      .filter((f): boolean =>
-        fs.statSync(path.join(ProjectPath.ExtensionFolder, f)).isDirectory()
-      );
-    extList.sort();
-
-
-    Logger.debug(LOG_TAG, 'Extensions found: ', JSON.stringify(Config.Extensions.extensions.keys()));
-  }
 
   private createUniqueExtensionObject(name: string, folder: string): IExtensionObject<unknown> {
     let id = name;

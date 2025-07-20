@@ -13,7 +13,8 @@ export class ExtensionMWs {
     next: NextFunction
   ): Promise<void> {
     try {
-      req.resultPipe = await ObjectManagers.getInstance().ExtensionManager.repository.fetchList();
+      // Use the new wrapper function to get extensions with installed status
+      req.resultPipe = await ObjectManagers.getInstance().ExtensionManager.getExtensionListWithInstallStatus();
       return next();
     } catch (err) {
       if (err instanceof Error) {

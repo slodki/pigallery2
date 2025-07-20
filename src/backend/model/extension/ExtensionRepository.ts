@@ -7,7 +7,7 @@ export class ExtensionRepository {
   lastUpdate = 0;
   private UPDATE_FREQUENCY_MS = 30 * 1000;
 
-  public async getExtensionList() {
+  public async getExtensionList(): Promise<ExtensionListItem[]> {
     if (this.lastUpdate < Date.now() - this.UPDATE_FREQUENCY_MS) {
       await this.fetchList();
     }
@@ -55,7 +55,7 @@ export class ExtensionRepository {
       }
 
       extensions.push({
-        id: getUniqueID(entries[0]),
+        id: getUniqueID(entries[0].toLowerCase().replace(/\s+/g, '-')),
         name: entries[0],
         url: this.getUrlFromMDLink(entries[1]),
         readme: this.getUrlFromMDLink(entries[2]),

@@ -4,4 +4,5 @@ export interface ExtensionListItem {
   url?: string;
   readme?: string;
   zipUrl: string;
+  installed?: boolean;
 }
