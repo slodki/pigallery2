@@ -32,7 +32,7 @@ export class ServerExtensionsEntryConfig {
       name: $localize`Extension folder`,
       priority: ConfigPriority.underTheHood,
     },
-    description: $localize`Folder where the app stores all extensions. Individual extensions live in their own sub-folders.`,
+    description: $localize`Sub-folder of the given extension.`,
   })
   path: string = '';
 
@@ -62,8 +62,9 @@ export class ServerExtensionsConfig extends ClientExtensionsConfig {
     tags: {
       name: $localize`Extension folder`,
       priority: ConfigPriority.underTheHood,
-      dockerSensitive: true
-    },
+      dockerSensitive: true,
+      uiResetNeeded: {server: true},
+    } as TAGS,
     description: $localize`Folder where the app stores all extensions. Individual extensions live in their own sub-folders.`,
   })
   folder: string = 'extensions';
@@ -74,7 +75,7 @@ export class ServerExtensionsConfig extends ClientExtensionsConfig {
       name: $localize`Installed extensions`,
       uiIcon: 'ionList',
       priority: ConfigPriority.advanced
-    }
+    } as TAGS
   })
   extensions: IConfigMap<ServerExtensionsEntryConfig> = new ConfigMap();
 
