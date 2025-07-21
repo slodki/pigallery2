@@ -35,4 +35,48 @@ export class ExtensionMWs {
       );
     }
   }
+
+  public static async installExtension(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      // Extract the extension ID from the request body
+      const extensionId = req.body.id;
+
+      if (!extensionId) {
+        return next(
+          new ErrorDTO(
+            ErrorCodes.INPUT_ERROR,
+            'Extension ID is required'
+          )
+        );
+      }
+
+      // Call the installExtension method on the ExtensionManager
+      await ObjectManagers.getInstance().ExtensionManager.installExtension(extensionId);
+
+      // Set the result to an empty object (success)
+      req.resultPipe = { success: true };
+      return next();
+    } catch (err) {
+      if (err instanceof Error) {
+        return next(
+          new ErrorDTO(
+            ErrorCodes.JOB_ERROR,
+            'Extension installation error: ' + err.toString(),
+            err
+          )
+        );
+      }
+      return next(
+        new ErrorDTO(
+          ErrorCodes.JOB_ERROR,
+          'Extension installation error: ' + JSON.stringify(err, null, '  '),
+          err
+        )
+      );
+    }
+  }
 }
