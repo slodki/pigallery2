@@ -3,6 +3,7 @@ import { ExtensionInstallerService } from './extension-installer.service';
 import { ExtensionListItem } from '../../../../../common/entities/extension/ExtensionListItem';
 import { NotificationService } from '../../../model/notification.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import {SettingsService} from '../settings.service';
 
 @Component({
   selector: 'app-extension-installer',
@@ -17,6 +18,7 @@ export class ExtensionInstallerComponent {
   public error: string | null = null;
 
   constructor(
+    public settingsService: SettingsService,
     private extensionService: ExtensionInstallerService,
     private notificationService: NotificationService
   ) {}
@@ -42,21 +44,22 @@ export class ExtensionInstallerComponent {
       });
   }
 
-  public installExtension(extension: ExtensionListItem): void {
+  public async installExtension(extension: ExtensionListItem): Promise<void> {
     if (extension.installed) {
       return;
     }
 
     this.loading = true;
-    this.extensionService.installExtension(extension.id)
-      .then(() => {
-        extension.installed = true;
-        this.notificationService.success(`Extension "${extension.name}" installed successfully`);
-        this.loading = false;
-      })
-      .catch(err => {
-        this.notificationService.error(`Failed to install extension "${extension.name}"`, err);
-        this.loading = false;
-      });
+    try {
+      await this.extensionService.installExtension(extension.id);
+      extension.installed = true;
+      await this.settingsService.getSettings();
+      this.notificationService.success(`Extension "${extension.name}" installed successfully`);
+    }catch(err) {
+      this.notificationService.error(`Failed to install extension "${extension.name}"`, err);
+    }finally {
+
+      this.loading = false;
+    }
   }
 }
