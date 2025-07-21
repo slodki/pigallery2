@@ -3,6 +3,7 @@ import {Config} from '../../../common/config/private/Config';
 import * as fs from 'fs';
 import * as path from 'path';
 import {pipeline} from 'stream/promises';
+import { Readable } from 'stream';
 import {IObjectManager} from '../database/IObjectManager';
 import {Logger} from '../../Logger';
 import {IExtensionEvents, IExtensionObject} from './IExtension';
@@ -254,8 +255,10 @@ export class ExtensionManager implements IObjectManager {
       throw new Error(`Unexpected response ${response.statusText}`);
     }
 
+    const nodeReadable = Readable.fromWeb(response.body as any);
+
     // Pipe the response body to a file
-    await pipeline(response.body, fs.createWriteStream(outputPath));
+    await pipeline(nodeReadable, fs.createWriteStream(outputPath));
   }
 
   private async unzipFile(zipFilePath: string, outputPath: string): Promise<void> {
