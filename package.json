@@ -112,7 +112,7 @@
     "codelyzer": "6.0.2",
     "core-js": "3.29.0",
     "coveralls": "3.1.1",
-    "cypress": "13.1.0",
+    "cypress": "14.5.3",
     "deep-equal-in-any-order": "2.0.5",
     "ejs-loader": "0.5.0",
     "eslint": "8.36.0",
