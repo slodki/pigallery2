@@ -43,3 +43,6 @@ test.*
 .nyc_output/
 .vscode*
 !test/setup-local.js  # Excludes setup.js from the ignore rule
+/demo/tmp2/
+/demo/tmp33asd/
+/demo/images2/
