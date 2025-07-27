@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { imageSize } from 'image-size';
+
 import { Config } from '../../../common/config/private/Config';
 import { FaceRegion, PhotoMetadata } from '../../../common/entities/PhotoDTO';
 import { VideoMetadata } from '../../../common/entities/VideoDTO';
@@ -16,7 +16,7 @@ import { Utils } from '../../../common/Utils';
 import { FFmpegFactory } from '../FFmpegFactory';
 import { ExtensionDecorator } from '../extension/ExtensionDecorator';
 import { DateTags } from './MetadataCreationDate';
-
+const { imageSizeFromFile } = require('image-size/fromFile')
 const LOG_TAG = '[MetadataLoader]';
 const ffmpeg = FFmpegFactory.get();
 
@@ -181,7 +181,7 @@ export class MetadataLoader {
       icc: false,
       jfif: false, //not needed and not supported for png
       ihdr: true,
-      iptc: true, 
+      iptc: true,
       exif: true,
       gps: true,
       reviveValues: false, //don't convert timestamps
@@ -201,7 +201,7 @@ export class MetadataLoader {
       }
       try {
         //read the actual image size, don't rely on tags for this
-        const info = imageSize(fullPath);
+        const info = await imageSizeFromFile(fullPath);
         metadata.size = { width: info.width, height: info.height };
       } catch (e) {
         //in case of failure, set dimensions to 0 so they may be read via tags
@@ -405,7 +405,7 @@ export class MetadataLoader {
       }
       return currentObject;
     }
-  
+
     function extractTSAndOffset(mainpath: string, extrapath: string, extratype: string) {
       let ts: string | undefined = undefined;
       let offset: string | undefined = undefined;
@@ -425,7 +425,7 @@ export class MetadataLoader {
       }
       return [ts, offset];
     }
-    
+
 
   }
 
@@ -519,7 +519,7 @@ export class MetadataLoader {
       } else {
         metadata.rating = (rting as RatingTypes);
       }
-    } 
+    }
   }
 
   private static mapFaces(metadata: PhotoMetadata, exif: any, orientation: number) {

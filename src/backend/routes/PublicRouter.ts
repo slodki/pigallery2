@@ -84,9 +84,6 @@ export class PublicRouter {
           permissions: req.session['user'].permissions,
         } as UserDTO;
 
-        if (!res.tpl.user.csrfToken && req.csrfToken) {
-          res.tpl.user.csrfToken = req.csrfToken();
-        }
       }
       const confCopy = Config.toJSON({
         attachVolatile: true,
