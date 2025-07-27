@@ -13,13 +13,19 @@ import {TestHelper} from '../../../TestHelper';
 process.env.NODE_ENV = 'test';
 const chai: any = require('chai');
 const chaiHttp = require('chai-http');
-const should = chai.should();
+chai.should();
 chai.use(chaiHttp);
 
 // to help WebStorm to handle the test cases
 declare let describe: any;
 declare const after: any;
 declare const it: any;
+declare global {
+  export interface Object {
+    should: Chai.Assertion;
+  }
+}
+
 const tmpDescribe = describe;
 describe = DBTestHelper.describe({sqlite: true});
 
