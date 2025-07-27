@@ -4,27 +4,39 @@ import {BehaviorSubject, Subscription} from 'rxjs';
 import {AutoCompleteService, RenderableAutoCompleteItem,} from '../autocomplete.service';
 import {MetadataSearchQueryTypes, SearchQueryTypes,} from '../../../../../../common/entities/SearchQueryDTO';
 import {Config} from '../../../../../../common/config/public/Config';
-import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator,} from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, FormsModule } from '@angular/forms';
 import {AutoCompleteRenderItem} from '../AutoCompleteRenderItem';
+import { NgIf, NgFor, NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
+import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-gallery-search-field-base',
-  templateUrl: './search-field-base.gallery.component.html',
-  styleUrls: ['./search-field-base.gallery.component.css'],
-  providers: [
-    AutoCompleteService,
-    RouterLink,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GallerySearchFieldBaseComponent),
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => GallerySearchFieldBaseComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-gallery-search-field-base',
+    templateUrl: './search-field-base.gallery.component.html',
+    styleUrls: ['./search-field-base.gallery.component.css'],
+    providers: [
+        AutoCompleteService,
+        RouterLink,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => GallerySearchFieldBaseComponent),
+            multi: true,
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => GallerySearchFieldBaseComponent),
+            multi: true,
+        },
+    ],
+    standalone: true,
+    imports: [
+        FormsModule,
+        NgIf,
+        NgFor,
+        NgClass,
+        NgSwitch,
+        NgSwitchCase,
+        NgIconComponent,
+    ],
 })
 export class GallerySearchFieldBaseComponent
     implements ControlValueAccessor, Validator, OnDestroy {

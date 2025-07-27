@@ -1,8 +1,16 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { BsDatepickerInputDirective, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-timestamp-datepicker',
-  templateUrl: './datepicker.component.html',
+    selector: 'app-timestamp-datepicker',
+    templateUrl: './datepicker.component.html',
+    standalone: true,
+    imports: [
+        BsDatepickerInputDirective,
+        FormsModule,
+        BsDatepickerDirective,
+    ],
 })
 export class TimeStampDatePickerComponent {
   timestampValue = 0;

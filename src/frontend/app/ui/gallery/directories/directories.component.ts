@@ -1,11 +1,15 @@
 import {Component, ElementRef, HostListener, Input, OnChanges} from '@angular/core';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {SubDirectoryDTO} from '../../../../../common/entities/DirectoryDTO';
+import { NgFor } from '@angular/common';
+import { GalleryDirectoryComponent } from './directory/directory.gallery.component';
 
 @Component({
-  selector: 'app-gallery-directories',
-  templateUrl: './directories.component.html',
-  styleUrls: ['./directories.component.css'],
+    selector: 'app-gallery-directories',
+    templateUrl: './directories.component.html',
+    styleUrls: ['./directories.component.css'],
+    standalone: true,
+    imports: [NgFor, GalleryDirectoryComponent],
 })
 export class DirectoriesComponent implements OnChanges {
   @Input() directories: SubDirectoryDTO[];

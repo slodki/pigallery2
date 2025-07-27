@@ -18,11 +18,34 @@ import {PiTitleService} from '../../model/pi-title.service';
 import {GPXFilesFilterPipe} from '../../pipes/GPXFilesFilterPipe';
 import {MDFilesFilterPipe} from '../../pipes/MDFilesFilterPipe';
 import {ContentLoaderService, ContentWrapperWithError} from './contentLoader.service';
+import { GalleryLightboxComponent } from './lightbox/lightbox.gallery.component';
+import { FrameComponent } from '../frame/frame.component';
+import { NgIf } from '@angular/common';
+import { RandomQueryBuilderGalleryComponent } from './random-query-builder/random-query-builder.gallery.component';
+import { GalleryNavigatorComponent } from './navigator/navigator.gallery.component';
+import { DirectoriesComponent } from './directories/directories.component';
+import { GalleryBlogComponent } from './blog/blog.gallery.component';
+import { GalleryMapComponent } from './map/map.gallery.component';
+import { PhotoFilterPipe } from '../../pipes/PhotoFilterPipe';
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.css'],
+    selector: 'app-gallery',
+    templateUrl: './gallery.component.html',
+    styleUrls: ['./gallery.component.css'],
+    standalone: true,
+    imports: [
+        GalleryLightboxComponent,
+        FrameComponent,
+        NgIf,
+        RandomQueryBuilderGalleryComponent,
+        GalleryNavigatorComponent,
+        DirectoriesComponent,
+        GalleryBlogComponent,
+        GalleryMapComponent,
+        GalleryGridComponent,
+        GPXFilesFilterPipe,
+        PhotoFilterPipe,
+    ],
 })
 export class GalleryComponent implements OnInit, OnDestroy {
   @ViewChild(GalleryGridComponent, {static: false})

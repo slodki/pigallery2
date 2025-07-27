@@ -7,11 +7,15 @@ import {JobDTOUtils} from '../../../../../../common/entities/job/JobDTO';
 import {BackendtextService} from '../../../../model/backendtext.service';
 import {BsModalRef,BsModalService} from 'ngx-bootstrap/modal';
 import {ConfigStyle} from '../../settings.service';
+import { NgIf } from '@angular/common';
+import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-settings-job-button',
-  templateUrl: './job-button.settings.component.html',
-  styleUrls: ['./job-button.settings.component.css'],
+    selector: 'app-settings-job-button',
+    templateUrl: './job-button.settings.component.html',
+    styleUrls: ['./job-button.settings.component.css'],
+    standalone: true,
+    imports: [NgIf, NgIconComponent],
 })
 export class JobButtonComponent {
   @Input() jobName: string;

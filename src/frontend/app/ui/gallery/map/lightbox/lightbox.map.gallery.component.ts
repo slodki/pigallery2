@@ -32,17 +32,25 @@ import {
   tileLayer,
   TileLayer
 } from 'leaflet';
-import {LeafletControlLayersConfig} from '@asymmetrik/ngx-leaflet';
 import {ThemeService} from '../../../../model/theme.service';
 import {Subscription} from 'rxjs';
 import {MarkerFactory} from '../MarkerFactory';
 import {ionImageOutline, ionWarningOutline} from '@ng-icons/ionicons';
+import {LeafletModule, LeafletControlLayersConfig} from '@bluehalo/ngx-leaflet';
+import {NgIf} from '@angular/common';
+import {NgIconComponent} from '@ng-icons/core';
 
 
 @Component({
   selector: 'app-gallery-map-lightbox',
   styleUrls: ['./lightbox.map.gallery.component.css'],
   templateUrl: './lightbox.map.gallery.component.html',
+  standalone: true,
+  imports: [
+    LeafletModule,
+    NgIf,
+    NgIconComponent,
+  ],
 })
 export class GalleryMapLightboxComponent implements OnChanges, OnDestroy {
   @Input() photos: PhotoDTO[];

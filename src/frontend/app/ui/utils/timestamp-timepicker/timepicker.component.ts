@@ -1,8 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { TimepickerComponent } from 'ngx-bootstrap/timepicker';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-timestamp-timepicker',
-  templateUrl: './timepicker.component.html',
+    selector: 'app-timestamp-timepicker',
+    templateUrl: './timepicker.component.html',
+    standalone: true,
+    imports: [TimepickerComponent, FormsModule],
 })
 export class TimeStampTimePickerComponent {
   timestampValue = 0;
