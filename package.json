@@ -67,7 +67,7 @@
     "@angular-eslint/schematics": "15.2.1",
     "@angular-eslint/template-parser": "15.2.1",
     "@angular/animations": "15.2.2",
-    "@angular/cli": "15.2.2",
+    "@angular/cli": "16.2.16",
     "@angular/common": "15.2.2",
     "@angular/compiler": "15.2.2",
     "@angular/compiler-cli": "15.2.2",
