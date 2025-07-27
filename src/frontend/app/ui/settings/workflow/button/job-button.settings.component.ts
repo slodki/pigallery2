@@ -5,8 +5,7 @@ import {ScheduledJobsService} from '../../scheduled-jobs.service';
 import {NotificationService} from '../../../../model/notification.service';
 import {JobDTOUtils} from '../../../../../../common/entities/job/JobDTO';
 import {BackendtextService} from '../../../../model/backendtext.service';
-import {BsModalRef} from 'ngx-bootstrap/modal';
-import {BsModalService} from '../../../../../../../node_modules/ngx-bootstrap/modal';
+import {BsModalRef,BsModalService} from 'ngx-bootstrap/modal';
 import {ConfigStyle} from '../../settings.service';
 
 @Component({
