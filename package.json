@@ -67,7 +67,7 @@
     "@angular-eslint/schematics": "17.5.3",
     "@angular-eslint/template-parser": "17.5.3",
     "@angular/animations": "17.3.12",
-    "@angular/cli": "17.3.17",
+    "@angular/cli": "18.2.20",
     "@angular/common": "17.3.12",
     "@angular/compiler": "17.3.12",
     "@angular/compiler-cli": "17.3.12",
