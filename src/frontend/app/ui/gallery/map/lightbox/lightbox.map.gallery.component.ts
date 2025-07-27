@@ -42,15 +42,14 @@ import {NgIconComponent} from '@ng-icons/core';
 
 
 @Component({
-  selector: 'app-gallery-map-lightbox',
-  styleUrls: ['./lightbox.map.gallery.component.css'],
-  templateUrl: './lightbox.map.gallery.component.html',
-  standalone: true,
-  imports: [
-    LeafletModule,
-    NgIf,
-    NgIconComponent,
-  ],
+    selector: 'app-gallery-map-lightbox',
+    styleUrls: ['./lightbox.map.gallery.component.css'],
+    templateUrl: './lightbox.map.gallery.component.html',
+    imports: [
+        LeafletModule,
+        NgIf,
+        NgIconComponent,
+    ]
 })
 export class GalleryMapLightboxComponent implements OnChanges, OnDestroy {
   @Input() photos: PhotoDTO[];

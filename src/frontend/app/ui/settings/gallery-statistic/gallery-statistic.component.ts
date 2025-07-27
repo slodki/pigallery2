@@ -7,7 +7,6 @@ import { FileSizePipe } from '../../../pipes/FileSizePipe';
     selector: 'app-settings-gallery-statistic',
     templateUrl: './gallery-statistic.component.html',
     styleUrls: ['./gallery-statistic.component.css'],
-    standalone: true,
     imports: [NgIconComponent, FileSizePipe]
 })
 export class GalleryStatisticComponent {

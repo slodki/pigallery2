@@ -9,8 +9,7 @@ import { JsonPipe } from '@angular/common';
     selector: 'app-saved-search-popup-btn',
     templateUrl: './saved-search-popup.component.html',
     styleUrls: ['./saved-search-popup.component.css'],
-    standalone: true,
-    imports: [NgIconComponent, JsonPipe],
+    imports: [NgIconComponent, JsonPipe]
 })
 export class SavedSearchPopupComponent {
   @Input() disabled: boolean;

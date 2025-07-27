@@ -12,7 +12,6 @@ import { DurationPipe } from '../../../../pipes/DurationPipe';
     selector: 'app-settings-job-progress',
     templateUrl: './job-progress.settings.component.html',
     styleUrls: ['./job-progress.settings.component.css'],
-    standalone: true,
     imports: [
         NgIf,
         NgIconComponent,
@@ -21,7 +20,7 @@ import { DurationPipe } from '../../../../pipes/DurationPipe';
         DecimalPipe,
         DatePipe,
         DurationPipe,
-    ],
+    ]
 })
 export class JobProgressComponent implements OnDestroy, OnChanges {
   @Input() progress: JobProgressDTO;

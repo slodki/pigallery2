@@ -17,7 +17,6 @@ import { StringifyRole } from '../../../pipes/StringifyRolePipe';
     selector: 'app-settings-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, FormsModule, NgClass, NgIconComponent, ModalDirective, StringifyRole]
 })
 export class UsersComponent implements OnInit {

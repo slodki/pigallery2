@@ -8,8 +8,7 @@ import { GalleryDirectoryComponent } from './directory/directory.gallery.compone
     selector: 'app-gallery-directories',
     templateUrl: './directories.component.html',
     styleUrls: ['./directories.component.css'],
-    standalone: true,
-    imports: [NgFor, GalleryDirectoryComponent],
+    imports: [NgFor, GalleryDirectoryComponent]
 })
 export class DirectoriesComponent implements OnChanges {
   @Input() directories: SubDirectoryDTO[];

@@ -28,13 +28,12 @@ import { GallerySearchQueryBuilderComponent } from '../query-builder/query-bulde
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         GallerySearchFieldBaseComponent,
         FormsModule,
         NgIconComponent,
         GallerySearchQueryBuilderComponent,
-    ],
+    ]
 })
 export class GallerySearchFieldComponent
     implements ControlValueAccessor, Validator {

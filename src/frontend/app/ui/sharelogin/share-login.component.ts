@@ -14,7 +14,6 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-share-login',
     templateUrl: './share-login.component.html',
     styleUrls: ['./share-login.component.css'],
-    standalone: true,
     imports: [
         LanguageComponent,
         IconComponent,
@@ -22,7 +21,7 @@ import { NgIconComponent } from '@ng-icons/core';
         FormsModule,
         NgIconComponent,
         AsyncPipe,
-    ],
+    ]
 })
 export class ShareLoginComponent implements OnInit {
   password: string;

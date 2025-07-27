@@ -27,7 +27,6 @@ import { NgIconComponent } from '@ng-icons/core';
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         FormsModule,
         NgIf,
@@ -36,7 +35,7 @@ import { NgIconComponent } from '@ng-icons/core';
         NgSwitch,
         NgSwitchCase,
         NgIconComponent,
-    ],
+    ]
 })
 export class GallerySearchFieldBaseComponent
     implements ControlValueAccessor, Validator, OnDestroy {

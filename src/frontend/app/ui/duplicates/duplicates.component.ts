@@ -24,7 +24,6 @@ interface GroupedDuplicate {
     selector: 'app-duplicate',
     templateUrl: './duplicates.component.html',
     styleUrls: ['./duplicates.component.css'],
-    standalone: true,
     imports: [
         FrameComponent,
         NgIf,
@@ -33,7 +32,7 @@ interface GroupedDuplicate {
         DuplicatesPhotoComponent,
         DatePipe,
         FileSizePipe,
-    ],
+    ]
 })
 export class DuplicateComponent implements OnDestroy, OnInit {
   directoryGroups: GroupedDuplicate[] = null;

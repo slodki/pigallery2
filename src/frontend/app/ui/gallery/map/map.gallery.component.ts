@@ -15,8 +15,7 @@ import { LeafletModule } from '@bluehalo/ngx-leaflet';
     selector: 'app-gallery-map',
     templateUrl: './map.gallery.component.html',
     styleUrls: ['./map.gallery.component.css'],
-    standalone: true,
-    imports: [GalleryMapLightboxComponent, LeafletModule],
+    imports: [GalleryMapLightboxComponent, LeafletModule]
 })
 export class GalleryMapComponent implements OnChanges, IRenderable {
   @Input() photos: PhotoDTO[];

@@ -15,12 +15,11 @@ import { IconComponent } from '../../../../icon.component';
     templateUrl: './directory.gallery.component.html',
     styleUrls: ['./directory.gallery.component.css'],
     providers: [RouterLink],
-    standalone: true,
     imports: [
         RouterLink,
         NgIf,
         IconComponent,
-    ],
+    ]
 })
 export class GalleryDirectoryComponent implements OnInit, OnDestroy {
   @Input() directory: SubDirectoryDTO;

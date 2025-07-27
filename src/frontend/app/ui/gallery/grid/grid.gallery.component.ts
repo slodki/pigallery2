@@ -37,7 +37,6 @@ import { ParseIntPipe } from '../../../pipes/ParseIntPipe';
     selector: 'app-gallery-grid',
     templateUrl: './grid.gallery.component.html',
     styleUrls: ['./grid.gallery.component.css'],
-    standalone: true,
     imports: [
         NgIf,
         NgFor,
@@ -48,7 +47,7 @@ import { ParseIntPipe } from '../../../pipes/ParseIntPipe';
         GalleryBlogComponent,
         GalleryPhotoComponent,
         ParseIntPipe,
-    ],
+    ]
 })
 export class GalleryGridComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy {

@@ -20,7 +20,6 @@ import { FormsModule } from '@angular/forms';
     selector: 'app-gallery-share',
     templateUrl: './share.gallery.component.html',
     styleUrls: ['./share.gallery.component.css'],
-    standalone: true,
     imports: [
         NgIf,
         NgIconComponent,
@@ -28,7 +27,7 @@ import { FormsModule } from '@angular/forms';
         ClipboardModule,
         NgFor,
         DatePipe,
-    ],
+    ]
 })
 export class GalleryShareComponent implements OnInit, OnDestroy {
   enabled = true;

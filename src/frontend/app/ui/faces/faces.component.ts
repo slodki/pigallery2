@@ -13,14 +13,13 @@ import { FaceComponent } from './face/face.component';
     selector: 'app-faces',
     templateUrl: './faces.component.html',
     styleUrls: ['./faces.component.css'],
-    standalone: true,
     imports: [
         FrameComponent,
         NgFor,
         FaceComponent,
         NgIf,
         AsyncPipe,
-    ],
+    ]
 })
 export class FacesComponent implements OnInit {
   @ViewChild('container', {static: true}) container: ElementRef;

@@ -10,7 +10,6 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-language',
     templateUrl: './language.component.html',
     styleUrls: ['./language.component.css'],
-    standalone: true,
     imports: [
         BsDropdownDirective,
         BsDropdownToggleDirective,
@@ -18,7 +17,7 @@ import { NgIconComponent } from '@ng-icons/core';
         NgIconComponent,
         BsDropdownMenuDirective,
         NgFor,
-    ],
+    ]
 })
 export class LanguageComponent {
   languages: string[] = [];

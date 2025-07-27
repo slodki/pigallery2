@@ -22,7 +22,6 @@ import { FileSizePipe } from '../../../../pipes/FileSizePipe';
     selector: 'app-info-panel',
     styleUrls: ['./info-panel.lightbox.gallery.component.css'],
     templateUrl: './info-panel.lightbox.gallery.component.html',
-    standalone: true,
     imports: [
         NgIf,
         NgIconComponent,
@@ -34,7 +33,7 @@ import { FileSizePipe } from '../../../../pipes/FileSizePipe';
         DatePipe,
         DurationPipe,
         FileSizePipe,
-    ],
+    ]
 })
 export class InfoPanelLightboxComponent implements OnInit, OnChanges {
   @Input() media: MediaDTO;

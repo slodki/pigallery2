@@ -36,7 +36,6 @@ import { StringifySortingMethod } from '../../../../../pipes/StringifySortingMet
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         BsDropdownDirective,
         BsDropdownToggleDirective,
@@ -46,7 +45,7 @@ import { StringifySortingMethod } from '../../../../../pipes/StringifySortingMet
         BsDropdownMenuDirective,
         NgFor,
         StringifySortingMethod,
-    ],
+    ]
 })
 export class SortingMethodSettingsEntryComponent
     implements ControlValueAccessor, Validator, OnInit {

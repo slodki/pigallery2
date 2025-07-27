@@ -24,7 +24,6 @@ import { SavedSearchPopupComponent } from '../../albums/saved-search-popup/saved
     templateUrl: './search.gallery.component.html',
     styleUrls: ['./search.gallery.component.css'],
     providers: [AutoCompleteService, RouterLink],
-    standalone: true,
     imports: [
         FormsModule,
         GallerySearchFieldBaseComponent,
@@ -33,7 +32,7 @@ import { SavedSearchPopupComponent } from '../../albums/saved-search-popup/saved
         GallerySearchQueryBuilderComponent,
         NgIf,
         SavedSearchPopupComponent,
-    ],
+    ]
 })
 export class GallerySearchComponent implements OnDestroy {
   public searchQueryDTO: SearchQueryDTO = {

@@ -18,7 +18,6 @@ import { DurationPipe } from '../../../../pipes/DurationPipe';
     templateUrl: './photo.grid.gallery.component.html',
     styleUrls: ['./photo.grid.gallery.component.css'],
     providers: [RouterLink],
-    standalone: true,
     imports: [
         NgIf,
         GalleryPhotoLoadingComponent,
@@ -28,7 +27,7 @@ import { DurationPipe } from '../../../../pipes/DurationPipe';
         NgSwitch,
         NgSwitchCase,
         DurationPipe,
-    ],
+    ]
 })
 export class GalleryPhotoComponent implements IRenderable, OnInit, OnDestroy {
   @Input() gridMedia: GridMedia;

@@ -11,8 +11,7 @@ import { NgIf } from '@angular/common';
     selector: 'app-gallery-lightbox-media',
     styleUrls: ['./media.lightbox.gallery.component.css'],
     templateUrl: './media.lightbox.gallery.component.html',
-    standalone: true,
-    imports: [NgIf],
+    imports: [NgIf]
 })
 export class GalleryLightboxMediaComponent implements OnChanges {
   @Input() gridMedia: GridMedia;

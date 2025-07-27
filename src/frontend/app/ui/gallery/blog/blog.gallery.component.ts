@@ -10,7 +10,6 @@ import { FileDTOToRelativePathPipe } from '../../../pipes/FileDTOToRelativePathP
     selector: 'app-gallery-blog',
     templateUrl: './blog.gallery.component.html',
     styleUrls: ['./blog.gallery.component.css'],
-    standalone: true,
     imports: [
         NgIf,
         NgFor,
@@ -18,7 +17,7 @@ import { FileDTOToRelativePathPipe } from '../../../pipes/FileDTOToRelativePathP
         NgIconComponent,
         AsyncPipe,
         FileDTOToRelativePathPipe,
-    ],
+    ]
 })
 export class GalleryBlogComponent implements OnChanges {
   @Input() open: boolean;

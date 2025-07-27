@@ -25,7 +25,6 @@ import { RouterLink } from '@angular/router';
     selector: 'app-lightbox-controls',
     styleUrls: ['./controls.lightbox.gallery.component.css', './inputrange.css'],
     templateUrl: './controls.lightbox.gallery.component.html',
-    standalone: true,
     imports: [
         NgIf,
         NgIconComponent,
@@ -35,7 +34,7 @@ import { RouterLink } from '@angular/router';
         FormsModule,
         NgFor,
         RouterLink,
-    ],
+    ]
 })
 export class ControlsLightboxComponent implements OnDestroy, OnInit, OnChanges {
   readonly MAX_ZOOM = 10;

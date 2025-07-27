@@ -5,8 +5,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-timestamp-timepicker',
     templateUrl: './timepicker.component.html',
-    standalone: true,
-    imports: [TimepickerComponent, FormsModule],
+    imports: [TimepickerComponent, FormsModule]
 })
 export class TimeStampTimePickerComponent {
   timestampValue = 0;

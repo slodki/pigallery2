@@ -22,12 +22,11 @@ import { GallerySearchQueryEntryComponent } from '../query-enrty/query-entry.sea
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         GallerySearchFieldBaseComponent,
         FormsModule,
         GallerySearchQueryEntryComponent,
-    ],
+    ]
 })
 export class GallerySearchQueryBuilderComponent
     implements ControlValueAccessor, Validator {

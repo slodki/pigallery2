@@ -27,7 +27,6 @@ import { StringifyEnum } from '../../pipes/StringifyEnum';
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.css'],
-    standalone: true,
     imports: [
         FrameComponent,
         NgIf,
@@ -46,7 +45,7 @@ import { StringifyEnum } from '../../pipes/StringifyEnum';
         JsonPipe,
         DatePipe,
         StringifyEnum,
-    ],
+    ]
 })
 export class AdminComponent implements OnInit, AfterViewInit {
   @ViewChildren('setting') settingsComponents: QueryList<ISettingsComponent>;

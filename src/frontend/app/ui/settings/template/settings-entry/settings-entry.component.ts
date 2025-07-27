@@ -64,7 +64,6 @@ interface IState {
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         NgIf,
         NgSwitch,
@@ -78,7 +77,7 @@ interface IState {
         NgClass,
         PopoverDirective,
         SafeHtmlPipe,
-    ],
+    ]
 })
 export class SettingsEntryComponent
     implements ControlValueAccessor, Validator, OnChanges {

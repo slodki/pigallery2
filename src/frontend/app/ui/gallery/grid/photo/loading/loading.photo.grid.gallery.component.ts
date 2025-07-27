@@ -6,8 +6,7 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-gallery-grid-photo-loading',
     templateUrl: './loading.photo.grid.gallery.component.html',
     styleUrls: ['./loading.photo.grid.gallery.component.css'],
-    standalone: true,
-    imports: [NgIf, NgIconComponent],
+    imports: [NgIf, NgIconComponent]
 })
 export class GalleryPhotoLoadingComponent {
   @Input() animate: boolean;

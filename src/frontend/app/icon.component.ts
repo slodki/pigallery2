@@ -14,8 +14,7 @@ import { SafeHtmlPipe } from './pipes/SafeHTMLPipe';
            [attr.viewBox]="Config.Server.svgIcon.viewBox || '0 0 512 512'"
            [innerHtml]="Config.Server.svgIcon.items | safeHtml">
       </svg>`,
-    standalone: true,
-    imports: [SafeHtmlPipe],
+    imports: [SafeHtmlPipe]
 })
 export class IconComponent {
 

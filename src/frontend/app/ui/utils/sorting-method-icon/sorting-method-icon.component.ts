@@ -7,7 +7,6 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-sorting-method-icon',
     templateUrl: './sorting-method-icon.component.html',
     styleUrls: ['./sorting-method-icon.component.css'],
-    standalone: true,
     imports: [NgSwitch, NgSwitchCase, NgIconComponent]
 })
 export class SortingMethodIconComponent {

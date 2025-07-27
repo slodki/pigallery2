@@ -29,7 +29,6 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./frame.component.css'],
     providers: [RouterLink],
     encapsulation: ViewEncapsulation.Emulated,
-    standalone: true,
     imports: [
         LoadingBarModule,
         RouterLink,
@@ -48,7 +47,7 @@ import { FormsModule } from '@angular/forms';
         NgSwitchCase,
         FormsModule,
         JsonPipe,
-    ],
+    ]
 })
 export class FrameComponent {
   @Input() showSearch = false;

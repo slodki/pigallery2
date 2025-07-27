@@ -36,7 +36,6 @@ import { StringifySearchType } from '../../../../pipes/StringifySearchType';
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         NgIf,
         FormsModule,
@@ -47,7 +46,7 @@ import { StringifySearchType } from '../../../../pipes/StringifySearchType';
         NgSwitchCase,
         DatePipe,
         StringifySearchType,
-    ],
+    ]
 })
 export class GallerySearchQueryEntryComponent
     implements ControlValueAccessor, Validator {

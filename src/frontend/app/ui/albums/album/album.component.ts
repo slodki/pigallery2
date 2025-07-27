@@ -18,13 +18,12 @@ import { NgIconComponent } from '@ng-icons/core';
     templateUrl: './album.component.html',
     styleUrls: ['./album.component.css'],
     providers: [RouterLink],
-    standalone: true,
     imports: [
         RouterLink,
         NgIf,
         IconComponent,
         NgIconComponent,
-    ],
+    ]
 })
 export class AlbumComponent implements OnInit, OnDestroy {
   @Input() album: AlbumBaseDTO;

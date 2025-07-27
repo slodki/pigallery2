@@ -5,12 +5,11 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-timestamp-datepicker',
     templateUrl: './datepicker.component.html',
-    standalone: true,
     imports: [
         BsDatepickerInputDirective,
         FormsModule,
         BsDatepickerDirective,
-    ],
+    ]
 })
 export class TimeStampDatePickerComponent {
   timestampValue = 0;

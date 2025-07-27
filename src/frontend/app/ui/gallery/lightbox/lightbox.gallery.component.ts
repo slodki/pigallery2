@@ -31,7 +31,6 @@ export enum LightboxStates {
     selector: 'app-gallery-lightbox',
     styleUrls: ['./lightbox.gallery.component.css'],
     templateUrl: './lightbox.gallery.component.html',
-    standalone: true,
     imports: [
         GalleryLightboxMediaComponent,
         NgIf,
@@ -39,7 +38,7 @@ export enum LightboxStates {
         NgFor,
         ControlsLightboxComponent,
         InfoPanelLightboxComponent,
-    ],
+    ]
 })
 export class GalleryLightboxComponent implements OnDestroy, OnInit {
   @ViewChild('photo', {static: true})

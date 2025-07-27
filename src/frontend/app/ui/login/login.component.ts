@@ -13,13 +13,12 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    standalone: true,
     imports: [
         LanguageComponent,
         IconComponent,
         FormsModule,
         NgIconComponent,
-    ],
+    ]
 })
 export class LoginComponent implements OnInit {
   loginCredential: LoginCredential;

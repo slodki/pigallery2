@@ -15,12 +15,11 @@ import { NgIconComponent } from '@ng-icons/core';
     templateUrl: './face.component.html',
     styleUrls: ['./face.component.css'],
     providers: [RouterLink],
-    standalone: true,
     imports: [
         RouterLink,
         NgIf,
         NgIconComponent,
-    ],
+    ]
 })
 export class FaceComponent implements OnInit, OnDestroy {
   @Input() person: PersonDTO;

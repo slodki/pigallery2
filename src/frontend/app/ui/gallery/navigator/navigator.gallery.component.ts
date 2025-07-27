@@ -31,7 +31,6 @@ import { StringifyGridSize } from '../../../pipes/StringifyGridSize';
     styleUrls: ['./navigator.gallery.component.css'],
     templateUrl: './navigator.gallery.component.html',
     providers: [RouterLink],
-    standalone: true,
     imports: [
         NgIf,
         NgFor,
@@ -47,7 +46,7 @@ import { StringifyGridSize } from '../../../pipes/StringifyGridSize';
         StringifySortingMethod,
         StringifySearchQuery,
         StringifyGridSize,
-    ],
+    ]
 })
 export class GalleryNavigatorComponent {
   public readonly sortingByTypes: { key: number; value: string }[] = [];

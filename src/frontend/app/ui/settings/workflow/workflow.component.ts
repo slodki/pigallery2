@@ -48,7 +48,6 @@ import { JobProgressComponent } from './progress/job-progress.settings.component
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         NgFor,
         NgIf,
@@ -66,7 +65,7 @@ import { JobProgressComponent } from './progress/job-progress.settings.component
         ModalDirective,
         AsyncPipe,
         DatePipe,
-    ],
+    ]
 })
 export class WorkflowComponent implements ControlValueAccessor, Validator, OnInit, OnDestroy {
 

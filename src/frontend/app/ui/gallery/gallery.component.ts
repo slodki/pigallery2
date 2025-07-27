@@ -32,7 +32,6 @@ import { PhotoFilterPipe } from '../../pipes/PhotoFilterPipe';
     selector: 'app-gallery',
     templateUrl: './gallery.component.html',
     styleUrls: ['./gallery.component.css'],
-    standalone: true,
     imports: [
         GalleryLightboxComponent,
         FrameComponent,
@@ -45,7 +44,7 @@ import { PhotoFilterPipe } from '../../pipes/PhotoFilterPipe';
         GalleryGridComponent,
         GPXFilesFilterPipe,
         PhotoFilterPipe,
-    ],
+    ]
 })
 export class GalleryComponent implements OnInit, OnDestroy {
   @ViewChild(GalleryGridComponent, {static: false})

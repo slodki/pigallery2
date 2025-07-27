@@ -18,7 +18,6 @@ import { SavedSearchPopupComponent } from './saved-search-popup/saved-search-pop
     selector: 'app-albums',
     templateUrl: './albums.component.html',
     styleUrls: ['./albums.component.css'],
-    standalone: true,
     imports: [
         FrameComponent,
         NgFor,
@@ -29,7 +28,7 @@ import { SavedSearchPopupComponent } from './saved-search-popup/saved-search-pop
         GallerySearchQueryBuilderComponent,
         SavedSearchPopupComponent,
         AsyncPipe,
-    ],
+    ]
 })
 export class AlbumsComponent implements OnInit {
   @ViewChild('container', {static: true}) container: ElementRef;

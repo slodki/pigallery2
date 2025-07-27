@@ -7,7 +7,6 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-grid-size-icon',
     templateUrl: './grid-size-icon.component.html',
     styleUrls: ['./grid-size-icon.component.css'],
-    standalone: true,
     imports: [NgSwitch, NgSwitchCase, NgIconComponent]
 })
 export class GridSizeIconComponent {

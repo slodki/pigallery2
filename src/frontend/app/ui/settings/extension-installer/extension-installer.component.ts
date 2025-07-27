@@ -11,7 +11,6 @@ import { NgIf, NgFor } from '@angular/common';
     selector: 'app-extension-installer',
     templateUrl: './extension-installer.component.html',
     styleUrls: ['./extension-installer.component.css'],
-    standalone: true,
     imports: [NgIconComponent, ModalDirective, NgIf, NgFor]
 })
 export class ExtensionInstallerComponent {

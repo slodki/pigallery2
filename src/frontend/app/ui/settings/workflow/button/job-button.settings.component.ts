@@ -14,8 +14,7 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-settings-job-button',
     templateUrl: './job-button.settings.component.html',
     styleUrls: ['./job-button.settings.component.css'],
-    standalone: true,
-    imports: [NgIf, NgIconComponent],
+    imports: [NgIf, NgIconComponent]
 })
 export class JobButtonComponent {
   @Input() jobName: string;

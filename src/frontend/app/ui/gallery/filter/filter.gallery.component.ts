@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./filter.gallery.component.css'],
     templateUrl: './filter.gallery.component.html',
     providers: [RouterLink],
-    standalone: true,
     imports: [
         NgIf,
         NgFor,
@@ -20,7 +19,7 @@ import { FormsModule } from '@angular/forms';
         FormsModule,
         NgClass,
         DatePipe,
-    ],
+    ]
 })
 export class GalleryFilterComponent implements OnInit, OnDestroy {
   public readonly unknownText;

@@ -9,8 +9,7 @@ import { PopoverDirective } from 'ngx-bootstrap/popover';
     selector: 'app-duplicates-photo',
     templateUrl: './photo.duplicates.component.html',
     styleUrls: ['./photo.duplicates.component.css'],
-    standalone: true,
-    imports: [NgIf, PopoverDirective],
+    imports: [NgIf, PopoverDirective]
 })
 export class DuplicatesPhotoComponent implements OnInit, OnDestroy {
   @Input() media: MediaDTO;

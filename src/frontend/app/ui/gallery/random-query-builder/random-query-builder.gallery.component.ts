@@ -20,13 +20,12 @@ import { GallerySearchQueryBuilderComponent } from '../search/query-builder/quer
     selector: 'app-gallery-random-query-builder',
     templateUrl: './random-query-builder.gallery.component.html',
     styleUrls: ['./random-query-builder.gallery.component.css'],
-    standalone: true,
     imports: [
         NgIconComponent,
         FormsModule,
         ClipboardModule,
         GallerySearchQueryBuilderComponent,
-    ],
+    ]
 })
 export class RandomQueryBuilderGalleryComponent implements OnInit, OnDestroy {
   public searchQueryDTO: SearchQueryDTO = {

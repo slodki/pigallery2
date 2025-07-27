@@ -9,7 +9,6 @@ import { NgIconComponent } from '@ng-icons/core';
     selector: 'app-settigns-sharings-list',
     templateUrl: './sharings-list.component.html',
     styleUrls: ['./sharings-list.component.css'],
-    standalone: true,
     imports: [NgIf, NgFor, NgIconComponent, DatePipe]
 })
 export class SharingsListComponent implements OnInit {
