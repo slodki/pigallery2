@@ -1,4 +1,3 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode, Injectable, importProvidersFrom } from '@angular/core';
 import { environment } from './environments/environment';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi, HttpClient } from '@angular/common/http';

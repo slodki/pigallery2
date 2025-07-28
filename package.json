@@ -59,12 +59,7 @@
     "xml2js": "0.6.2"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "19.0.1",
-    "@angular-eslint/builder": "19.8.1",
-    "@angular-eslint/eslint-plugin": "19.8.1",
-    "@angular-eslint/eslint-plugin-template": "19.8.1",
-    "@angular-eslint/schematics": "19.8.1",
-    "@angular-eslint/template-parser": "19.8.1",
+    "angular-eslint": "19.8.1",
     "@angular/animations": "19.2.14",
     "@angular/cli": "19.2.15",
     "@angular/common": "19.2.14",
@@ -101,8 +96,7 @@
     "@types/node-geocoder": "4.2.0",
     "@types/nodemailer": "6.4.17",
     "@types/xml2js": "0.4.14",
-    "@typescript-eslint/eslint-plugin": "8.38.0",
-    "@typescript-eslint/parser": "8.38.0",
+    "typescript-eslint": "8.38.0",
     "bootstrap": "5.3.1",
     "chai": "5.2.1",
     "chai-http": "5.1.2",
