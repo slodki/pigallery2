@@ -24,7 +24,8 @@ export class Utils {
     });
   }
 
-  static removeNullOrEmptyObj<T extends { [key: string]: any }>(obj: T): T {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static removeNullOrEmptyObj<T extends Record<string, any>>(obj: T): T {
     if (typeof obj !== 'object' || obj == null) {
       return obj;
     }
@@ -49,13 +50,15 @@ export class Utils {
   }
 
   static shallowClone<T>(object: T): T {
-    const c: any = {};
+    const c: T = {} as T;
     for (const e of Object.entries(object)) {
-      c[e[0]] = e[1];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (c as Record<string, any>)[e[0]] = e[1];
     }
     return c;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static zeroPrefix(number: any, length: number): string {
     if (!isNaN(number)) {
       const zerosToAdd = Math.max(length - String(number).length, 0);
@@ -69,6 +72,7 @@ export class Utils {
   /**
    * Checks if the two input (let them be objects or arrays or just primitives) are equal
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static equalsFilter(object: any, filter: any, skipProp: string[] = []): boolean {
     if (typeof filter !== 'object' || filter == null) {
       return object === filter;
@@ -184,6 +188,7 @@ export class Utils {
 
 
   //function to calculate offset from exif.exif.gpsTimeStamp or exif.gps.GPSDateStamp + exif.gps.GPSTimestamp
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static getTimeOffsetByGPSStamp(timestamp: string, gpsTimeStamp: string, gps: any) {
     let UTCTimestamp = gpsTimeStamp;
     if (!UTCTimestamp &&
@@ -191,10 +196,11 @@ export class Utils {
       gps.GPSDateStamp &&
       gps.GPSTimeStamp) { //else use exif.gps.GPS*Stamp if available
       //GPS timestamp is always UTC (+00:00)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       UTCTimestamp = gps.GPSDateStamp.replaceAll(':', '-') + " " + gps.GPSTimeStamp.map((num: any) => Utils.zeroPrefix(num ,2)).join(':');
     }
     if (UTCTimestamp && timestamp) {
-      //offset in minutes is the difference between gps timestamp and given timestamp
+      //offset in minutes is the difference between gps timestamp, and given timestamp
       //to calculate this correctly, we have to work with the same offset
       const offsetMinutes: number = Math.round((Utils.timestampToMS(timestamp, '+00:00')- Utils.timestampToMS(UTCTimestamp, '+00:00')) / 1000 / 60);
       return Utils.getOffsetString(offsetMinutes);
@@ -241,7 +247,7 @@ export class Utils {
       return creationDate;
     }
   }
-  
+
   static isLeapYear(year: number) {
     return (0 == year % 4) && (0 != year % 100) || (0 == year % 400)
   }
@@ -285,11 +291,12 @@ export class Utils {
     return size.toFixed(2) + postFixes[index];
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static getUnique(arr: any[]) {
     return arr.filter((value, index, arr) => arr.indexOf(value) === index);
   }
 
-  static createRange(from: number, to: number): Array<number> {
+  static createRange(from: number, to: number): number[] {
     const arr = new Array(to - from + 1);
     let c = to - from + 1;
     while (c--) {
@@ -327,6 +334,7 @@ export class Utils {
     return url.substring(0, url.length - 1);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static updateKeys(targetObject: any, sourceObject: any): void {
     Object.keys(sourceObject).forEach((key): void => {
       if (typeof targetObject[key] === 'undefined') {
@@ -340,6 +348,7 @@ export class Utils {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static setKeys(targetObject: any, sourceObject: any): void {
     Object.keys(sourceObject).forEach((key): void => {
       if (typeof targetObject[key] === 'object') {
@@ -350,6 +359,7 @@ export class Utils {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static setKeysForced(targetObject: any, sourceObject: any): void {
     Object.keys(sourceObject).forEach((key): void => {
       if (typeof sourceObject[key] === 'object') {
@@ -363,12 +373,14 @@ export class Utils {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static isValidEnumInt(EnumType: any, value: number) {
     return typeof EnumType[value] === 'string';
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static enumToArray(EnumType: any): { key: number; value: string }[] {
-    const arr: Array<{ key: number; value: string }> = [];
+    const arr: { key: number; value: string }[] = [];
     for (const enumMember in EnumType) {
       // eslint-disable-next-line no-prototype-builtins
       if (!EnumType.hasOwnProperty(enumMember)) {
@@ -458,16 +470,19 @@ export class Utils {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public static getAnyX(num: number, arr: any[], start = 0): any[][] {
     if (num <= 0 || num > arr.length || start >= arr.length) {
       return [];
     }
     if (num <= 1) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return arr.slice(start).map((e): any[] => [e]);
     }
     if (num === arr.length - start) {
       return [arr.slice(start)];
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ret: any[][] = [];
     for (let i = start; i < arr.length; ++i) {
       Utils.getAnyX(num - 1, arr, i + 1).forEach((a): void => {
@@ -504,7 +519,7 @@ export class Utils {
 }
 
 export class LRU<V> {
-  data: { [key: string]: { value: V; usage: number } } = {};
+  data: Record<string, { value: V; usage: number }> = {};
 
   constructor(public readonly size: number) {
   }

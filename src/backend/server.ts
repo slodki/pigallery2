@@ -1,6 +1,5 @@
 import {Config} from '../common/config/private/Config';
 import * as express from 'express';
-import {Request} from 'express';
 import * as cookieParser from 'cookie-parser';
 import * as _http from 'http';
 import {Server as HttpServer} from 'http';
@@ -20,9 +19,8 @@ import {QueryParams} from '../common/QueryParams';
 import {ConfigClassBuilder} from 'typeconfig/node';
 import {ConfigClassOptions} from 'typeconfig/src/decorators/class/IConfigClass';
 import {ServerConfig} from '../common/config/private/PrivateConfig';
-import {unless} from 'express-unless';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const session = require('cookie-session');
 
 declare const process: NodeJS.Process;
@@ -139,17 +137,24 @@ export class Server {
     }
   }
 
-  private SIGTERM = () =>{
+  private SIGTERM = () => {
     Logger.info(LOG_TAG, 'SIGTERM signal received');
     this.server.close(() => {
       process.exit(0);
     });
-  }
+  };
 
   /**
+   *
    * Event listener for HTTP server "error" event.
    */
-  private onError = (error: any) => {
+  private onError = (error: {
+    errno?: number,
+    code?: string,
+    path?: string,
+    syscall?: string,
+    stack?: string
+  }) => {
     if (error.syscall !== 'listen') {
       Logger.error(LOG_TAG, 'Server error', error);
       throw error;
@@ -192,7 +197,7 @@ export class Server {
 
   public Stop(): Promise<void> {
     return new Promise((resolve, reject) => {
-      if(!this.server.listening){
+      if (!this.server.listening) {
         return resolve();
       }
       this.server.close((err) => {

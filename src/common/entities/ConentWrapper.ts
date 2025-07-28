@@ -260,7 +260,7 @@ export class ContentWrapper {
         name: (dir as DirectoryBaseDTO).cover.directory.name,
       } as DirectoryPathDTO;
 
-      // make sure that it is not a same object as one of the photo in the media[]
+      // make sure that it is not the same object as one of the photo in the media[]
       // as the next foreach would remove the directory
       (dir as DirectoryBaseDTO).cover = Utils.clone((dir as DirectoryBaseDTO).cover);
     }
