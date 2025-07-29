@@ -31,7 +31,7 @@ export class GalleryMapComponent implements OnChanges, IRenderable {
     zoomControl: false,
     dragging: false,
     keyboard: false,
-    tap: false,
+    tapHold: false,
     doubleClickZoom: false,
     boxZoom: false,
     zoom: 0,
