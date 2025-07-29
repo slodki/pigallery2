@@ -1,7 +1,6 @@
 import { enableProdMode, Injectable, importProvidersFrom } from '@angular/core';
 import { environment } from './environments/environment';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi, HttpClient } from '@angular/common/http';
-import { CSRFInterceptor } from './app/model/network/helper/csrf.interceptor';
 import { ErrorInterceptor } from './app/model/network/helper/error.interceptor';
 import { UrlSerializer, DefaultUrlSerializer, UrlTree } from '@angular/router';
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig, BrowserModule, HammerModule, bootstrapApplication } from '@angular/platform-browser';
@@ -125,7 +124,6 @@ bootstrapApplication(AppComponent, {
             ionBrowsersOutline, ionUnlinkOutline, ionSquareOutline, ionGridOutline,
             ionAppsOutline, ionOpenOutline, ionRefresh, ionExtensionPuzzleOutline, ionList
         }), ClipboardModule, TooltipModule.forRoot(), ToastrModule.forRoot(), ModalModule.forRoot(), CollapseModule.forRoot(), PopoverModule.forRoot(), BsDropdownModule.forRoot(), BsDatepickerModule.forRoot(), TimepickerModule.forRoot(), LoadingBarModule, LeafletModule, LeafletMarkerClusterModule, MarkdownModule.forRoot({ loader: HttpClient })),
-        { provide: HTTP_INTERCEPTORS, useClass: CSRFInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: UrlSerializer, useClass: CustomUrlSerializer },
         { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },

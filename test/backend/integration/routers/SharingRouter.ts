@@ -1,6 +1,5 @@
 import {Config} from '../../../../src/common/config/private/Config';
 import {Server} from '../../../../src/backend/server';
-import {LoginCredential} from '../../../../src/common/entities/LoginCredential';
 import {UserDTO, UserRoles} from '../../../../src/common/entities/UserDTO';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -13,11 +12,10 @@ import {QueryParams} from '../../../../src/common/QueryParams';
 import {ErrorCodes} from '../../../../src/common/entities/Error';
 import {DatabaseType} from '../../../../src/common/config/private/PrivateConfig';
 import {ProjectPath} from '../../../../src/backend/ProjectPath';
-
+import * as chai from "chai";
+import {default as chaiHttp, request} from "chai-http";
 
 process.env.NODE_ENV = 'test';
-const chai: any = require('chai');
-const chaiHttp = require('chai-http');
 const should = chai.should();
 chai.use(chaiHttp);
 
@@ -58,13 +56,12 @@ describe('SharingRouter', () => {
     result.should.have.status(200);
     result.body.should.be.a('object');
     should.equal(result.body.error, null);
-    result.body.result.csrfToken.should.be.a('string');
-    const {csrfToken, ...u} = result.body.result;
+    const {...u} = result.body.result;
     u.should.deep.equal(user);
   };
 
   const shareLogin = async (srv: Server, sharingKey: string, password?: string): Promise<any> => {
-    return (chai.request(srv.Server) as SuperAgentStatic)
+    return (request.execute(srv.Server) as SuperAgentStatic)
       .post(Config.Server.apiPath + '/share/login?' + QueryParams.gallery.sharingKey_query + '=' + sharingKey)
       .send({password});
 
