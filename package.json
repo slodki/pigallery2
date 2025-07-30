@@ -94,6 +94,7 @@
     "@types/node": "22.16.5",
     "@types/node-geocoder": "4.2.6",
     "@types/nodemailer": "6.4.17",
+    "@types/sharp": "0.31.1",
     "@types/xml2js": "0.4.14",
     "angular-eslint": "19.8.1",
     "bootstrap": "5.3.7",
