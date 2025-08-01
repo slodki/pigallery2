@@ -14,6 +14,7 @@
     "build-backend": "tsc",
     "pretest": "tsc",
     "test": "ng test  && nyc mocha --recursive test --exclude test/cypress/**/*.js",
+    "test-frontend": "ng test",
     "test-backend": "tsc && mocha --recursive test --exclude test/cypress/**/*.js",
     "coverage": "nyc report --reporter=lcov",
     "start": "node ./src/backend/index",
