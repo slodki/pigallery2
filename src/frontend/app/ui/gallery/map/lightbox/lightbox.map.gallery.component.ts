@@ -657,8 +657,9 @@ export class GalleryMapLightboxComponent implements OnChanges, OnDestroy {
 
         mkr.setIcon(pathLayer.icon);
 
-        // Setting popup info
-        mkr.bindPopup(file.name + ': ' + parsedGPX.name);
+        // Setting popup info with improved formatting
+        const popupText = `${file.name}: ${parsedGPX.name}${parsedGPX.author ? '<br/>Author: ' + parsedGPX.author : ''}${parsedGPX.description ? '<br/>Description: ' + parsedGPX.description : ''}`;
+        mkr.bindPopup(popupText);
 
         //add arch for long paths
         parsedGPX.path.forEach(p => {
@@ -718,4 +719,3 @@ export interface MapPhoto {
     thumbnail: Thumbnail;
   };
 }
-

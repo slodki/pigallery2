@@ -100,7 +100,7 @@ export class MapService {
 
   public async getMapCoordinates(
       file: FileDTO
-  ): Promise<{ name: string, path: LatLngLiteral[][]; markers: LatLngLiteral[] }> {
+  ): Promise<{ name: string, author?: string, description?: string, path: LatLngLiteral[][]; markers: LatLngLiteral[] }> {
     const filePath = Utils.concatUrls(
         file.directory.path,
         file.directory.name,
@@ -109,6 +109,23 @@ export class MapService {
     const gpx = await this.networkService.getXML(
         '/gallery/content/' + filePath + '/bestFit'
     );
+
+    // Look for name in metadata first, then in track
+    let name = '';
+    const metadata = gpx.getElementsByTagName('metadata')?.[0];
+    // Only look for direct name children of metadata, don't include author>name
+    const metadataName = Array.from(metadata?.children || [])
+      .find(child => child.tagName === 'name')?.textContent;
+    const trkName = gpx.getElementsByTagName('trk')?.[0]?.getElementsByTagName('name')?.[0]?.textContent;
+    name = metadataName || trkName || '';
+
+    // Get author from metadata
+    const author = gpx.getElementsByTagName('metadata')?.[0]?.getElementsByTagName('author')?.[0]?.getElementsByTagName('name')?.[0]?.textContent;
+
+    // Get description from metadata
+    const description = Array.from(metadata?.children || [])
+      .find(child => child.tagName === 'desc')?.textContent;
+
     const getCoordinates = (inputElement: Document, tagName: string): LatLngLiteral[] => {
       const elements = inputElement.getElementsByTagName(tagName);
       const ret: LatLngLiteral[] = [];
@@ -123,19 +140,21 @@ export class MapService {
     };
     const trksegs = gpx.getElementsByTagName('trkseg');
     if (!trksegs) {
-
       return {
-        name: gpx.getElementsByTagName('name')?.[0]?.textContent || '',
+        name,
+        author,
+        description,
         path: [getCoordinates(gpx, 'trkpt')],
         markers: getCoordinates(gpx, 'wpt'),
       };
     }
     const trksegArr = [].slice.call(trksegs);
     return {
-      name: gpx.getElementsByTagName('name')?.[0]?.textContent || '',
+      name,
+      author,
+      description,
       path: [...trksegArr].map(t => getCoordinates(t, 'trkpt')),
       markers: getCoordinates(gpx, 'wpt'),
     };
   }
 }
-
