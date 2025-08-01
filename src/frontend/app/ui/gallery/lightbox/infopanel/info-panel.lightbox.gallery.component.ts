@@ -6,34 +6,34 @@ import {VideoDTO, VideoMetadata,} from '../../../../../../common/entities/VideoD
 import {Utils} from '../../../../../../common/Utils';
 import {QueryService} from '../../../../model/query.service';
 import {MapService} from '../../map/map.service';
-import {SearchQueryTypes, TextSearch, TextSearchQueryMatchTypes,} from '../../../../../../common/entities/SearchQueryDTO';
+import {DistanceSearch, SearchQueryTypes, TextSearch, TextSearchQueryMatchTypes,} from '../../../../../../common/entities/SearchQueryDTO';
 import {AuthenticationService} from '../../../../model/network/authentication.service';
 import {LatLngLiteral, marker, Marker, TileLayer, tileLayer} from 'leaflet';
 import {ThemeService} from '../../../../model/theme.service';
 import {ContentLoaderService} from '../../contentLoader.service';
-import { NgIf, NgFor, NgSwitch, NgSwitchCase, DatePipe } from '@angular/common';
-import { NgIconComponent } from '@ng-icons/core';
-import { RouterLink } from '@angular/router';
-import { LeafletModule } from '@bluehalo/ngx-leaflet';
-import { DurationPipe } from '../../../../pipes/DurationPipe';
-import { FileSizePipe } from '../../../../pipes/FileSizePipe';
+import {NgIf, NgFor, NgSwitch, NgSwitchCase, DatePipe} from '@angular/common';
+import {NgIconComponent} from '@ng-icons/core';
+import {RouterLink} from '@angular/router';
+import {LeafletModule} from '@bluehalo/ngx-leaflet';
+import {DurationPipe} from '../../../../pipes/DurationPipe';
+import {FileSizePipe} from '../../../../pipes/FileSizePipe';
 
 @Component({
-    selector: 'app-info-panel',
-    styleUrls: ['./info-panel.lightbox.gallery.component.css'],
-    templateUrl: './info-panel.lightbox.gallery.component.html',
-    imports: [
-        NgIf,
-        NgIconComponent,
-        RouterLink,
-        NgFor,
-        NgSwitch,
-        NgSwitchCase,
-        LeafletModule,
-        DatePipe,
-        DurationPipe,
-        FileSizePipe,
-    ]
+  selector: 'app-info-panel',
+  styleUrls: ['./info-panel.lightbox.gallery.component.css'],
+  templateUrl: './info-panel.lightbox.gallery.component.html',
+  imports: [
+    NgIf,
+    NgIconComponent,
+    RouterLink,
+    NgFor,
+    NgSwitch,
+    NgSwitchCase,
+    LeafletModule,
+    DatePipe,
+    DurationPipe,
+    FileSizePipe,
+  ]
 })
 export class InfoPanelLightboxComponent implements OnInit, OnChanges {
   @Input() media: MediaDTO;
@@ -48,11 +48,11 @@ export class InfoPanelLightboxComponent implements OnInit, OnChanges {
   public markerLayer: Marker[] = [];
 
   constructor(
-      public queryService: QueryService,
-      public contentLoaderService: ContentLoaderService,
-      public mapService: MapService,
-      private authService: AuthenticationService,
-      private themeService: ThemeService
+    public queryService: QueryService,
+    public contentLoaderService: ContentLoaderService,
+    public mapService: MapService,
+    private authService: AuthenticationService,
+    private themeService: ThemeService
   ) {
     this.mapEnabled = Config.Map.enabled;
     this.searchEnabled = this.authService.canSearch();
@@ -69,16 +69,16 @@ export class InfoPanelLightboxComponent implements OnInit, OnChanges {
 
   get FullPath(): string {
     return Utils.concatUrls(
-        this.media.directory.path,
-        this.media.directory.name,
-        this.media.name
+      this.media.directory.path,
+      this.media.directory.name,
+      this.media.name
     );
   }
 
   get DirectoryPath(): string {
     return Utils.concatUrls(
-        this.media.directory.path,
-        this.media.directory.name
+      this.media.directory.path,
+      this.media.directory.name
     );
   }
 
@@ -126,28 +126,28 @@ export class InfoPanelLightboxComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     const metadata = this.media.metadata as PhotoMetadata;
     if (
-        (metadata.keywords && metadata.keywords.length > 0) ||
-        (metadata.faces && metadata.faces.length > 0)
+      (metadata.keywords && metadata.keywords.length > 0) ||
+      (metadata.faces && metadata.faces.length > 0)
     ) {
       this.keywords = [];
       if (Config.Faces.enabled) {
         const names: string[] = (metadata.faces || []).map(
-            (f): string => f.name
+          (f): string => f.name
         );
         this.keywords = names
-            .filter((name, index): boolean => names.indexOf(name) === index)
-            .map((n): { type: SearchQueryTypes; value: string } => ({
-              value: n,
-              type: SearchQueryTypes.person,
-            }));
+          .filter((name, index): boolean => names.indexOf(name) === index)
+          .map((n): { type: SearchQueryTypes; value: string } => ({
+            value: n,
+            type: SearchQueryTypes.person,
+          }));
       }
       this.keywords = this.keywords.concat(
-          (metadata.keywords || []).map(
-              (k): { type: SearchQueryTypes; value: string } => ({
-                value: k,
-                type: SearchQueryTypes.keyword,
-              })
-          )
+        (metadata.keywords || []).map(
+          (k): { type: SearchQueryTypes; value: string } => ({
+            value: k,
+            type: SearchQueryTypes.keyword,
+          })
+        )
       );
     }
   }
@@ -158,15 +158,15 @@ export class InfoPanelLightboxComponent implements OnInit, OnChanges {
 
   calcMpx(): string {
     return (
-        (this.media.metadata.size.width * this.media.metadata.size.height) /
-        1000000
+      (this.media.metadata.size.width * this.media.metadata.size.height) /
+      1000000
     ).toFixed(2);
   }
 
   isThisYear(): boolean {
     return (
-        new Date().getFullYear() ===
-        Utils.getUTCFullYear(this.media.metadata.creationDate, this.media.metadata.creationDateOffset)   
+      new Date().getFullYear() ===
+      Utils.getUTCFullYear(this.media.metadata.creationDate, this.media.metadata.creationDateOffset)
     );
   }
 
@@ -178,34 +178,31 @@ export class InfoPanelLightboxComponent implements OnInit, OnChanges {
   }
 
   hasTextPositionData(): boolean {
-    return (
-        !!(this.media as PhotoDTO).metadata.positionData &&
-        !!(
-            (this.media as PhotoDTO).metadata.positionData.city ||
-            (this.media as PhotoDTO).metadata.positionData.state ||
-            (this.media as PhotoDTO).metadata.positionData.country
-        )
-    );
+    return this.getPositionParts().length > 0;
   }
 
   hasGPS(): boolean {
     return !!(
-        (this.media as PhotoDTO).metadata.positionData &&
-        (this.media as PhotoDTO).metadata.positionData.GPSData &&
-        (this.media as PhotoDTO).metadata.positionData.GPSData.latitude &&
-        (this.media as PhotoDTO).metadata.positionData.GPSData.longitude
+      (this.media as PhotoDTO).metadata.positionData &&
+      (this.media as PhotoDTO).metadata.positionData.GPSData &&
+      (this.media as PhotoDTO).metadata.positionData.GPSData.latitude &&
+      (this.media as PhotoDTO).metadata.positionData.GPSData.longitude
     );
   }
 
   getPositionText(): string {
-    if (!(this.media as PhotoDTO).metadata.positionData) {
-      return '';
+    return this.getPositionParts().join(', ').trim(); //Filter removes empty elements, join concats the values separated by ', '
+  }
+
+  getPositionParts(): string[] {
+    if (!this.PositionData) {
+      return [];
     }
     return [
-      (this.media as PhotoDTO).metadata.positionData.city,
-      (this.media as PhotoDTO).metadata.positionData.state,
-      (this.media as PhotoDTO).metadata.positionData.country
-    ].filter(elm => elm).join(', ').trim(); //Filter removes empty elements, join concats the values separated by ', '
+      this.PositionData.city,
+      this.PositionData.state,
+      this.PositionData.country
+    ].filter(text => !!text);
   }
 
   close(): void {
@@ -218,5 +215,18 @@ export class InfoPanelLightboxComponent implements OnInit, OnChanges {
       matchType: TextSearchQueryMatchTypes.exact_match,
       text: name,
     } as TextSearch);
+  }
+
+  getDistanceSearchQuery(): string {
+    return JSON.stringify({
+      type: SearchQueryTypes.distance,
+      from: {
+        GPSData: {
+          latitude: this.PositionData.GPSData.latitude,
+          longitude: this.PositionData.GPSData.longitude
+        }
+      },
+      distance: 1 // 1km radius
+    } as DistanceSearch);
   }
 }

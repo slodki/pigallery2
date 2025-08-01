@@ -125,7 +125,7 @@
     <div class="col-1 ps-0">
       <ng-icon class="details-icon" name="ionPricetagOutline"></ng-icon>
     </div>
-    <div class="col-11 keywords">
+    <div class="col-11 keywords clickable">
       <ng-template ngFor let-keyword [ngForOf]="keywords" let-last="last">
         <a *ngIf="searchEnabled"
            [routerLink]="['/search', getTextSearchQuery(keyword.value,keyword.type)]" [ngSwitch]="keyword.type">
@@ -148,13 +148,28 @@
       <ng-icon class="details-icon" name="ionLocationOutline"></ng-icon>
     </div>
     <div class="col-11">
-      <div class="details-main">
-        {{getPositionText() || "Position"}}
+      <div class="details-main clickable">
+        <ng-container *ngIf="searchEnabled && hasTextPositionData()">
+          <ng-container *ngFor="let item of getPositionParts(); let i = index; let isLast = last">
+            <a [routerLink]="['/search', getTextSearchQuery(item, SearchQueryTypes.position)]">{{item}}</a><!--
+            --><ng-container *ngIf="!isLast">, </ng-container>
+          </ng-container>
+        </ng-container>
+        <span *ngIf="!searchEnabled || !hasTextPositionData()">
+          {{getPositionText() || "Position"}}
+        </span>
       </div>
-      <div class="details-sub text-secondary row" *ngIf="hasGPS()">
+      <div class="details-sub text-secondary row clickable" *ngIf="hasGPS()">
         <div class="col-12">
-          {{PositionData.GPSData.latitude.toFixed(6)}},
-          {{PositionData.GPSData.longitude.toFixed(6)}}
+          <a *ngIf="searchEnabled"
+             [routerLink]="['/search', getDistanceSearchQuery()]">
+            {{PositionData.GPSData.latitude.toFixed(6)}},
+            {{PositionData.GPSData.longitude.toFixed(6)}}
+          </a>
+          <span *ngIf="!searchEnabled">
+            {{PositionData.GPSData.latitude.toFixed(6)}},
+            {{PositionData.GPSData.longitude.toFixed(6)}}
+          </span>
         </div>
       </div>
     </div>
