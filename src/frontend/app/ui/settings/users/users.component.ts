@@ -8,11 +8,16 @@ import {Utils} from '../../../../../common/Utils';
 import {ErrorCodes, ErrorDTO} from '../../../../../common/entities/Error';
 import {UsersSettingsService} from './users.service';
 import {SettingsService} from '../settings.service';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgIconComponent } from '@ng-icons/core';
+import { StringifyRole } from '../../../pipes/StringifyRolePipe';
 
 @Component({
-  selector: 'app-settings-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+    selector: 'app-settings-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.css'],
+    imports: [NgIf, NgFor, FormsModule, NgClass, NgIconComponent, ModalDirective, StringifyRole]
 })
 export class UsersComponent implements OnInit {
 

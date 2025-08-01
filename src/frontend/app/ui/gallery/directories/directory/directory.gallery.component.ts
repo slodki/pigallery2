@@ -7,12 +7,19 @@ import {Media} from '../../Media';
 import {Thumbnail, ThumbnailManagerService,} from '../../thumbnailManager.service';
 import {QueryService} from '../../../../model/query.service';
 import {CoverPhotoDTO} from '../../../../../../common/entities/PhotoDTO';
+import { NgIf } from '@angular/common';
+import { IconComponent } from '../../../../icon.component';
 
 @Component({
-  selector: 'app-gallery-directory',
-  templateUrl: './directory.gallery.component.html',
-  styleUrls: ['./directory.gallery.component.css'],
-  providers: [RouterLink],
+    selector: 'app-gallery-directory',
+    templateUrl: './directory.gallery.component.html',
+    styleUrls: ['./directory.gallery.component.css'],
+    providers: [RouterLink],
+    imports: [
+        RouterLink,
+        NgIf,
+        IconComponent,
+    ]
 })
 export class GalleryDirectoryComponent implements OnInit, OnDestroy {
   @Input() directory: SubDirectoryDTO;

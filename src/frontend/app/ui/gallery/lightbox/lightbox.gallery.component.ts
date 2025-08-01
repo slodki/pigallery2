@@ -16,6 +16,9 @@ import {ControlsLightboxComponent} from './controls/controls.lightbox.gallery.co
 import {SupportedFormats} from '../../../../../common/SupportedFormats';
 import {GridMedia} from '../grid/GridMedia';
 import {PiTitleService} from '../../../model/pi-title.service';
+import { NgIf, NgFor } from '@angular/common';
+import { NgIconComponent } from '@ng-icons/core';
+import { InfoPanelLightboxComponent } from './infopanel/info-panel.lightbox.gallery.component';
 
 export enum LightboxStates {
   Open = 1,
@@ -25,9 +28,17 @@ export enum LightboxStates {
 }
 
 @Component({
-  selector: 'app-gallery-lightbox',
-  styleUrls: ['./lightbox.gallery.component.css'],
-  templateUrl: './lightbox.gallery.component.html',
+    selector: 'app-gallery-lightbox',
+    styleUrls: ['./lightbox.gallery.component.css'],
+    templateUrl: './lightbox.gallery.component.html',
+    imports: [
+        GalleryLightboxMediaComponent,
+        NgIf,
+        NgIconComponent,
+        NgFor,
+        ControlsLightboxComponent,
+        InfoPanelLightboxComponent,
+    ]
 })
 export class GalleryLightboxComponent implements OnDestroy, OnInit {
   @ViewChild('photo', {static: true})

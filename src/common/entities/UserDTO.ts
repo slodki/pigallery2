@@ -14,7 +14,6 @@ export interface UserDTO {
   name: string;
   password: string;
   role: UserRoles;
-  csrfToken?: string;
   usedSharingKey?: string;
   permissions: string[]; // user can only see these permissions. if ends with *, its recursive
 }

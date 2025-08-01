@@ -2,29 +2,38 @@ import {Component, EventEmitter, forwardRef, Input, Output, TemplateRef} from '@
 import {Router, RouterLink} from '@angular/router';
 import {AutoCompleteService} from '../autocomplete.service';
 import {SearchQueryDTO} from '../../../../../../common/entities/SearchQueryDTO';
-import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator,} from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, FormsModule } from '@angular/forms';
 import {SearchQueryParserService} from '../search-query-parser.service';
 import {BsModalRef, BsModalService,} from 'ngx-bootstrap/modal';
 import {Utils} from '../../../../../../common/Utils';
+import { GallerySearchFieldBaseComponent } from '../search-field-base/search-field-base.gallery.component';
+import { NgIconComponent } from '@ng-icons/core';
+import { GallerySearchQueryBuilderComponent } from '../query-builder/query-bulder.gallery.component';
 
 @Component({
-  selector: 'app-gallery-search-field',
-  templateUrl: './search-field.gallery.component.html',
-  styleUrls: ['./search-field.gallery.component.css'],
-  providers: [
-    AutoCompleteService,
-    RouterLink,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GallerySearchFieldComponent),
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => GallerySearchFieldComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-gallery-search-field',
+    templateUrl: './search-field.gallery.component.html',
+    styleUrls: ['./search-field.gallery.component.css'],
+    providers: [
+        AutoCompleteService,
+        RouterLink,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => GallerySearchFieldComponent),
+            multi: true,
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => GallerySearchFieldComponent),
+            multi: true,
+        },
+    ],
+    imports: [
+        GallerySearchFieldBaseComponent,
+        FormsModule,
+        NgIconComponent,
+        GallerySearchQueryBuilderComponent,
+    ]
 })
 export class GallerySearchFieldComponent
     implements ControlValueAccessor, Validator {

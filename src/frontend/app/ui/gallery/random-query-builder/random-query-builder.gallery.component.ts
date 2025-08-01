@@ -11,11 +11,21 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {QueryParams} from '../../../../../common/QueryParams';
 import {SearchQueryParserService} from '../search/search-query-parser.service';
 import {ContentLoaderService} from '../contentLoader.service';
+import { NgIconComponent } from '@ng-icons/core';
+import { FormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
+import { GallerySearchQueryBuilderComponent } from '../search/query-builder/query-bulder.gallery.component';
 
 @Component({
-  selector: 'app-gallery-random-query-builder',
-  templateUrl: './random-query-builder.gallery.component.html',
-  styleUrls: ['./random-query-builder.gallery.component.css'],
+    selector: 'app-gallery-random-query-builder',
+    templateUrl: './random-query-builder.gallery.component.html',
+    styleUrls: ['./random-query-builder.gallery.component.css'],
+    imports: [
+        NgIconComponent,
+        FormsModule,
+        ClipboardModule,
+        GallerySearchQueryBuilderComponent,
+    ]
 })
 export class RandomQueryBuilderGalleryComponent implements OnInit, OnDestroy {
   public searchQueryDTO: SearchQueryDTO = {

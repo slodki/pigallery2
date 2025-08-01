@@ -8,12 +8,26 @@ import {PageHelper} from '../../../../model/page.helper';
 import {PhotoDTO, PhotoMetadata,} from '../../../../../../common/entities/PhotoDTO';
 import {SearchQueryTypes, TextSearch, TextSearchQueryMatchTypes,} from '../../../../../../common/entities/SearchQueryDTO';
 import {AuthenticationService} from '../../../../model/network/authentication.service';
+import { NgIf, NgFor, NgSwitch, NgSwitchCase } from '@angular/common';
+import { GalleryPhotoLoadingComponent } from './loading/loading.photo.grid.gallery.component';
+import { NgIconComponent } from '@ng-icons/core';
+import { DurationPipe } from '../../../../pipes/DurationPipe';
 
 @Component({
-  selector: 'app-gallery-grid-photo',
-  templateUrl: './photo.grid.gallery.component.html',
-  styleUrls: ['./photo.grid.gallery.component.css'],
-  providers: [RouterLink],
+    selector: 'app-gallery-grid-photo',
+    templateUrl: './photo.grid.gallery.component.html',
+    styleUrls: ['./photo.grid.gallery.component.css'],
+    providers: [RouterLink],
+    imports: [
+        NgIf,
+        GalleryPhotoLoadingComponent,
+        NgIconComponent,
+        RouterLink,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        DurationPipe,
+    ]
 })
 export class GalleryPhotoComponent implements IRenderable, OnInit, OnDestroy {
   @Input() gridMedia: GridMedia;

@@ -12,17 +12,41 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {GallerySortingService} from './sorting.service';
 import {PageHelper} from '../../../model/page.helper';
-import {BsDropdownDirective} from 'ngx-bootstrap/dropdown';
+import { BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective } from 'ngx-bootstrap/dropdown';
 import {FilterService} from '../filter/filter.service';
 import {ContentLoaderService, ContentWrapperWithError, DirectoryContent} from '../contentLoader.service';
 import {GalleryNavigatorService} from './navigator.service';
 import {GridSizes} from '../../../../../common/entities/GridSizes';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NgIconComponent } from '@ng-icons/core';
+import { SortingMethodIconComponent } from '../../utils/sorting-method-icon/sorting-method-icon.component';
+import { GridSizeIconComponent } from '../../utils/grid-size-icon/grid-size-icon.component';
+import { GalleryFilterComponent } from '../filter/filter.gallery.component';
+import { StringifySortingMethod } from '../../../pipes/StringifySortingMethod';
+import { StringifySearchQuery } from '../../../pipes/StringifySearchQuery';
+import { StringifyGridSize } from '../../../pipes/StringifyGridSize';
 
 @Component({
-  selector: 'app-gallery-navbar',
-  styleUrls: ['./navigator.gallery.component.css'],
-  templateUrl: './navigator.gallery.component.html',
-  providers: [RouterLink],
+    selector: 'app-gallery-navbar',
+    styleUrls: ['./navigator.gallery.component.css'],
+    templateUrl: './navigator.gallery.component.html',
+    providers: [RouterLink],
+    imports: [
+        NgIf,
+        NgFor,
+        RouterLink,
+        NgIconComponent,
+        BsDropdownDirective,
+        BsDropdownToggleDirective,
+        SortingMethodIconComponent,
+        BsDropdownMenuDirective,
+        GridSizeIconComponent,
+        GalleryFilterComponent,
+        AsyncPipe,
+        StringifySortingMethod,
+        StringifySearchQuery,
+        StringifyGridSize,
+    ]
 })
 export class GalleryNavigatorComponent {
   public readonly sortingByTypes: { key: number; value: string }[] = [];

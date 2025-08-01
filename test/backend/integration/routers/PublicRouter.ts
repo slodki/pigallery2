@@ -1,7 +1,6 @@
 import {Config} from '../../../../src/common/config/private/Config';
 import {Server} from '../../../../src/backend/server';
 import {UserDTO, UserRoles} from '../../../../src/common/entities/UserDTO';
-import * as path from 'path';
 import * as fs from 'fs';
 import {SQLConnection} from '../../../../src/backend/model/database/SQLConnection';
 import {ObjectManagers} from '../../../../src/backend/model/ObjectManagers';
@@ -11,14 +10,12 @@ import {RouteTestingHelper} from './RouteTestingHelper';
 import {QueryParams} from '../../../../src/common/QueryParams';
 import {DatabaseType} from '../../../../src/common/config/private/PrivateConfig';
 import {TestHelper} from '../../../TestHelper';
-import {createLoggerWrapper} from '../../../../src/backend/Logger';
 import {ProjectPath} from '../../../../src/backend/ProjectPath';
-
+import * as chai from "chai";
+import {default as chaiHttp, request} from "chai-http";
 
 process.env.NODE_ENV = 'test';
-const chai: any = require('chai');
-const chaiHttp = require('chai-http');
-const should = chai.should();
+chai.should();
 const {expect} = chai;
 chai.use(chaiHttp);
 
@@ -64,7 +61,6 @@ describe('PublicRouter', () => {
 
     const u = JSON.parse(result.text.substring(result.text.indexOf(startToken) + startToken.length, result.text.indexOf(endToken)));
 
-    delete u?.csrfToken;
     expect(u).to.deep.equal(user);
   };
 
@@ -75,7 +71,7 @@ describe('PublicRouter', () => {
     afterEach(tearDown);
 
     const fistLoad = async (srv: Server, sharingKey: string): Promise<any> => {
-      return (chai.request(srv.Server) as SuperAgentStatic)
+      return (request.execute(srv.Server) as SuperAgentStatic)
         .get('/share/' + sharingKey);
     };
 

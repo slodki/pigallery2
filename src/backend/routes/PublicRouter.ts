@@ -78,15 +78,11 @@ export class PublicRouter {
         res.tpl.user = {
           id: req.session['user'].id,
           name: req.session['user'].name,
-          csrfToken: req.session['user'].csrfToken,
           role: req.session['user'].role,
           usedSharingKey: req.session['user'].usedSharingKey,
           permissions: req.session['user'].permissions,
         } as UserDTO;
 
-        if (!res.tpl.user.csrfToken && req.csrfToken) {
-          res.tpl.user.csrfToken = req.csrfToken();
-        }
       }
       const confCopy = Config.toJSON({
         attachVolatile: true,

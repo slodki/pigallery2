@@ -146,6 +146,7 @@ export class SearchQueryParser {
       if (parts && parts.length === 3) {
         timestamp = Date.UTC(parts[0], parts[1] - 1, parts[2], 0, 0, 0, 0); // Note: months are 0-based
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       // ignoring errors
     }
@@ -401,11 +402,11 @@ export class SearchQueryParser {
 
     // parse text search
     const tmp = TextSearchQueryTypes.map((type) => ({
-      key: (this.keywords as any)[SearchQueryTypes[type]] + ':',
+      key: (this.keywords as never)[SearchQueryTypes[type]] + ':',
       queryTemplate: {type, text: ''} as TextSearch,
     })).concat(
         TextSearchQueryTypes.map((type) => ({
-          key: (this.keywords as any)[SearchQueryTypes[type]] + '!:',
+          key: (this.keywords as never)[SearchQueryTypes[type]] + '!:',
           queryTemplate: {type, text: '', negate: true} as TextSearch,
         }))
     );
@@ -629,7 +630,7 @@ export class SearchQueryParser {
           );
         } else {
           return (
-              (this.keywords as any)[SearchQueryTypes[query.type]] +
+              (this.keywords as never)[SearchQueryTypes[query.type]] +
               colon +
               SearchQueryParser.stringifyText(
                   (query as TextSearch).text,
@@ -648,7 +649,7 @@ export class SearchQueryParser {
           return '';
         }
         return (
-            (this.keywords as any)[SearchQueryTypes[query.type]] +
+            (this.keywords as never)[SearchQueryTypes[query.type]] +
             colon +
             SearchQueryParser.stringifyText(
                 (query as TextSearch).text,

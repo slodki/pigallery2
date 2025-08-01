@@ -1,25 +1,29 @@
 import {Config} from '../../../../src/common/config/private/Config';
 import {Server} from '../../../../src/backend/server';
 import * as path from 'path';
-import * as fs from 'fs';
 import {expect} from 'chai';
 import {SuperAgentStatic} from 'superagent';
 import {ProjectPath} from '../../../../src/backend/ProjectPath';
 import {DBTestHelper} from '../../DBTestHelper';
 import {ReIndexingSensitivity} from '../../../../src/common/config/private/PrivateConfig';
 import {TestHelper} from '../../../TestHelper';
-
+import * as chai from "chai";
+import {default as chaiHttp, request} from "chai-http";
 
 process.env.NODE_ENV = 'test';
-const chai: any = require('chai');
-const chaiHttp = require('chai-http');
-const should = chai.should();
+chai.should();
 chai.use(chaiHttp);
 
 // to help WebStorm to handle the test cases
 declare let describe: any;
 declare const after: any;
 declare const it: any;
+declare global {
+  export interface Object {
+    should: Chai.Assertion;
+  }
+}
+
 const tmpDescribe = describe;
 describe = DBTestHelper.describe({sqlite: true});
 
@@ -48,7 +52,7 @@ describe('GalleryRouter', (sqlHelper: DBTestHelper) => {
     afterEach(tearDown);
 
     it('should load gallery', async () => {
-      const result = await (chai.request(server.Server) as SuperAgentStatic)
+      const result = await (request.execute(server.Server) as SuperAgentStatic)
         .get(Config.Server.apiPath + '/gallery/content/');
 
       (result.should as any).have.status(200);
@@ -59,10 +63,10 @@ describe('GalleryRouter', (sqlHelper: DBTestHelper) => {
 
     it('should load gallery twice (to force loading form db)', async () => {
       Config.Indexing.reIndexingSensitivity = ReIndexingSensitivity.low;
-      const _ = await (chai.request(server.Server) as SuperAgentStatic)
+      const _ = await (request.execute(server.Server) as SuperAgentStatic)
         .get(Config.Server.apiPath + '/gallery/content/orientation');
 
-      const result = await (chai.request(server.Server) as SuperAgentStatic)
+      const result = await (request.execute(server.Server) as SuperAgentStatic)
         .get(Config.Server.apiPath + '/gallery/content/orientation');
 
       (result.should as any).have.status(200);
@@ -80,7 +84,7 @@ describe('GalleryRouter', (sqlHelper: DBTestHelper) => {
     afterEach(tearDown);
 
     it('should get video without transcoding', async () => {
-      const result = await (chai.request(server.Server) as SuperAgentStatic)
+      const result = await (request.execute(server.Server) as SuperAgentStatic)
         .get(Config.Server.apiPath + '/gallery/content/video.mp4/bestFit');
 
       (result.should as any).have.status(200);

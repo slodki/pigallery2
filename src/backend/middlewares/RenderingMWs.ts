@@ -38,15 +38,11 @@ export class RenderingMWs {
     const user = {
       id: req.session['user'].id,
       name: req.session['user'].name,
-      csrfToken: req.session['user'].csrfToken || req.csrfToken(),
       role: req.session['user'].role,
       usedSharingKey: req.session['user'].usedSharingKey,
       permissions: req.session['user'].permissions,
     } as UserDTO;
 
-    if (!user.csrfToken && req.csrfToken) {
-      user.csrfToken = req.csrfToken();
-    }
 
     RenderingMWs.renderMessage(res, user);
   }

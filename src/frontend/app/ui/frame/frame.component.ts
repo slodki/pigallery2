@@ -10,17 +10,44 @@ import {NavigationLinkTypes, ScrollUpModes, ThemeModes} from '../../../../common
 import {SearchQueryDTO} from '../../../../common/entities/SearchQueryDTO';
 import {Utils} from '../../../../common/Utils';
 import {PageHelper} from '../../model/page.helper';
-import {BsDropdownDirective} from 'ngx-bootstrap/dropdown';
+import { BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective } from 'ngx-bootstrap/dropdown';
 import {LanguageComponent} from '../language/language.component';
 import {ThemeService} from '../../model/theme.service';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { IconComponent } from '../../icon.component';
+import { CollapseDirective } from 'ngx-bootstrap/collapse';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, JsonPipe } from '@angular/common';
+import { GallerySearchComponent } from '../gallery/search/search.gallery.component';
+import { GalleryShareComponent } from '../gallery/share/share.gallery.component';
+import { NgIconComponent } from '@ng-icons/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-frame',
-  templateUrl: './frame.component.html',
-  styleUrls: ['./frame.component.css'],
-  providers: [RouterLink],
-  encapsulation: ViewEncapsulation.Emulated,
+    selector: 'app-frame',
+    templateUrl: './frame.component.html',
+    styleUrls: ['./frame.component.css'],
+    providers: [RouterLink],
+    encapsulation: ViewEncapsulation.Emulated,
+    imports: [
+        LoadingBarModule,
+        RouterLink,
+        IconComponent,
+        CollapseDirective,
+        NgFor,
+        NgIf,
+        GallerySearchComponent,
+        GalleryShareComponent,
+        NgIconComponent,
+        LanguageComponent,
+        BsDropdownDirective,
+        BsDropdownToggleDirective,
+        BsDropdownMenuDirective,
+        NgSwitch,
+        NgSwitchCase,
+        FormsModule,
+        JsonPipe,
+    ]
 })
 export class FrameComponent {
   @Input() showSearch = false;

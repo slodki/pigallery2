@@ -15,24 +15,38 @@ import {
   TextSearchQueryTypes,
 } from '../../../../../../common/entities/SearchQueryDTO';
 import {Utils} from '../../../../../../common/Utils';
-import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, UntypedFormControl, ValidationErrors, Validator,} from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, UntypedFormControl, ValidationErrors, Validator, FormsModule } from '@angular/forms';
+import { NgIf, NgFor, NgClass, NgSwitch, NgSwitchCase, DatePipe } from '@angular/common';
+import { NgIconComponent } from '@ng-icons/core';
+import { StringifySearchType } from '../../../../pipes/StringifySearchType';
 
 @Component({
-  selector: 'app-gallery-search-query-entry',
-  templateUrl: './query-entry.search.gallery.component.html',
-  styleUrls: ['./query-entry.search.gallery.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GallerySearchQueryEntryComponent),
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => GallerySearchQueryEntryComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-gallery-search-query-entry',
+    templateUrl: './query-entry.search.gallery.component.html',
+    styleUrls: ['./query-entry.search.gallery.component.css'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => GallerySearchQueryEntryComponent),
+            multi: true,
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => GallerySearchQueryEntryComponent),
+            multi: true,
+        },
+    ],
+    imports: [
+        NgIf,
+        FormsModule,
+        NgFor,
+        NgClass,
+        NgIconComponent,
+        NgSwitch,
+        NgSwitchCase,
+        DatePipe,
+        StringifySearchType,
+    ]
 })
 export class GallerySearchQueryEntryComponent
     implements ControlValueAccessor, Validator {

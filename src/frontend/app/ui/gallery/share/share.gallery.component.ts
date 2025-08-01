@@ -10,13 +10,24 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {UserRoles} from '../../../../../common/entities/UserDTO';
 import {AuthenticationService} from '../../../model/network/authentication.service';
-import {ClipboardService} from 'ngx-clipboard';
+import { ClipboardService, ClipboardModule } from 'ngx-clipboard';
 import {ContentLoaderService} from '../contentLoader.service';
+import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { NgIconComponent } from '@ng-icons/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-gallery-share',
-  templateUrl: './share.gallery.component.html',
-  styleUrls: ['./share.gallery.component.css'],
+    selector: 'app-gallery-share',
+    templateUrl: './share.gallery.component.html',
+    styleUrls: ['./share.gallery.component.css'],
+    imports: [
+        NgIf,
+        NgIconComponent,
+        FormsModule,
+        ClipboardModule,
+        NgFor,
+        DatePipe,
+    ]
 })
 export class GalleryShareComponent implements OnInit, OnDestroy {
   enabled = true;
