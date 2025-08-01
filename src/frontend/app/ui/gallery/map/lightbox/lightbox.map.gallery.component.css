@@ -59,7 +59,7 @@
 }
 
 #controls ng-icon {
-  vertical-align: middle;
+  vertical-align: middle !important;
 }
 
 #controls ng-icon ::ng-deep svg {
