@@ -7,8 +7,11 @@ RUN apk add --no-cache \
 
 COPY pigallery2-release /app
 WORKDIR /app
-RUN npm install --unsafe-perm  --fetch-timeout=90000
-RUN mkdir -p /app/data/{config,db,images,tmp}
+RUN npm install --unsafe-perm  --fetch-timeout=90000 && \
+    mkdir -p /app/data/config && \
+    mkdir -p /app/data/db && \
+    mkdir -p /app/data/images && \
+    mkdir -p /app/data/tmp
 
 
 #-----------------MAIN--------------------

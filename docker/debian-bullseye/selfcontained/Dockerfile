@@ -6,7 +6,10 @@ FROM node:22-bullseye AS builder
 RUN git clone https://github.com/bpatrik/pigallery2.git /build
 WORKDIR /build
 RUN npm install --unsafe-perm \
-    && mkdir -p /build/release/data/{config,db,images,tmp} \
+    && mkdir -p /build/release/data/config \
+    && mkdir -p /build/release/data/db \
+    && mkdir -p /build/release/data/images \
+    && mkdir -p /build/release/data/tmp \
     && npm run create-release
 WORKDIR /build/release
 RUN npm install --unsafe-perm
