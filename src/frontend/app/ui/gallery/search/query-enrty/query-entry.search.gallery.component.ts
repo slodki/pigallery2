@@ -58,6 +58,8 @@ export class GallerySearchQueryEntryComponent
   @Output() delete = new EventEmitter<void>();
   @Input() id = 'NA';
 
+  public locationInputText: string = '';
+
   constructor() {
     this.SearchQueryTypesEnum = Utils.enumToArray(SearchQueryTypes);
     // Range queries need to be added as AND with min and max sub entry
@@ -172,8 +174,13 @@ export class GallerySearchQueryEntryComponent
       delete this.AsListQuery.list;
     }
     if (this.queryEntry.type === SearchQueryTypes.distance) {
-      this.AsDistanceQuery.from = {text: ''};
       this.AsDistanceQuery.distance = 1;
+      // Initialize location input text
+      if (this.AsDistanceQuery.from?.GPSData) {
+        this.locationInputText = `${this.AsDistanceQuery.from.GPSData.latitude}, ${this.AsDistanceQuery.from.GPSData.longitude}`;
+      } else {
+        this.locationInputText = this.AsDistanceQuery.from?.text || '';
+      }
     } else {
       delete this.AsDistanceQuery.from;
       delete this.AsDistanceQuery.distance;
@@ -197,6 +204,35 @@ export class GallerySearchQueryEntryComponent
     this.onChange();
   }
 
+  onLocationInputChange(value: string): void {
+    // Check if input matches coordinate pattern (number, number)
+    const coordMatch = value.match(/^\s*(-?\d+\.?\d*)\s*,\s*(-?\d+\.?\d*)\s*$/);
+    if (coordMatch) {
+      // It's coordinates
+      const latitude = parseFloat(coordMatch[1]);
+      const longitude = parseFloat(coordMatch[2]);
+
+      // Validate coordinate ranges
+      if (latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180) {
+        this.AsDistanceQuery.from = {
+          GPSData: {
+            latitude,
+            longitude
+          }
+        };
+      } else {
+        // Invalid coordinates, treat as text
+        this.AsDistanceQuery.from = { text: value };
+      }
+    } else {
+      // It's a location name
+      this.AsDistanceQuery.from = { text: value };
+    }
+
+    this.locationInputText = value;
+    this.onChange();
+  }
+
   deleteItem(): void {
     this.delete.emit();
   }
@@ -212,6 +248,16 @@ export class GallerySearchQueryEntryComponent
 
   public writeValue(obj: SearchQueryDTO): void {
     this.queryEntry = obj;
+
+    // Initialize location input text if this is a distance search
+    if (obj?.type === SearchQueryTypes.distance) {
+      const distanceSearch = obj as DistanceSearch;
+      if (distanceSearch.from?.GPSData) {
+        this.locationInputText = `${distanceSearch.from.GPSData.latitude}, ${distanceSearch.from.GPSData.longitude}`;
+      } else {
+        this.locationInputText = distanceSearch.from?.text || '';
+      }
+    }
   }
 
   registerOnChange(fn: (_: unknown) => void): void {
@@ -235,4 +281,3 @@ export class GallerySearchQueryEntryComponent
   private propagateTouch = (_: unknown): void => {
   };
 }
-
